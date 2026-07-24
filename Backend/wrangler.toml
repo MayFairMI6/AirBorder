@@ -1,0 +1,39 @@
+name = "airport-xr-flight-proxy"
+main = "src/index.js"
+compatibility_date = "2026-07-14"
+
+[vars]
+FLIGHT_PROVIDER = "flightaware"
+CLOUD_VISION_PROVIDER = "google"
+AMADEUS_ENVIRONMENT = "test"
+DEPLOYMENT_ENVIRONMENT = "production"
+REQUEST_AUTH_MODE = "cloudflare-access"
+REQUIRE_RATE_LIMITER = "true"
+# Replace these non-secret values with the Cloudflare Access application values.
+CF_ACCESS_TEAM_DOMAIN = "replace-me.cloudflareaccess.com"
+CF_ACCESS_AUD = "replace-with-access-application-aud"
+
+# Cloudflare Workers AI is optional at runtime. It is used only to order already
+# sourced fact IDs; deterministic Worker code renders all operational content.
+[ai]
+binding = "AI"
+
+# Project-specific namespace. The 60/minute value is an abuse guardrail, not a
+# provider quota; tune it to the lowest purchased upstream quota before launch.
+[[ratelimits]]
+name = "API_RATE_LIMITER"
+namespace_id = "26071401"
+
+  [ratelimits.simple]
+  limit = 60
+  period = 60
+
+# Set secrets with `npx wrangler secret put <NAME>`:
+# AMADEUS_CLIENT_ID, AMADEUS_CLIENT_SECRET, FLIGHTAWARE_AEROAPI_KEY,
+# optional SHERPA_API_KEY, TIMATIC_API_URL, TIMATIC_API_KEY,
+# TIMATIC_SERVICE_TOKEN, GEMINI_API_KEY, and GOOGLE_VISION_API_KEY.
+# GOOGLE_PLACES_API_KEY and TRANSITLAND_API_KEY are reserved for adapters that
+# are not implemented by this Worker yet; do not provision unused secrets.
+# Never put credentials in this file or commit Backend/.dev.vars.
+# The AI binding above uses the Cloudflare account directly; it does not use an
+# application secret. Future Gemini/Hugging Face keys are not read by this code.

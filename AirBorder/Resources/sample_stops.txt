@@ -1,0 +1,4 @@
+stop_id,stop_name,stop_lat,stop_lon,wheelchair_boarding
+AIRPORT,Airport Terminal 2,40.6413,-73.7781,1
+CITY,Manhattan Central,40.7527,-73.9772,1
+

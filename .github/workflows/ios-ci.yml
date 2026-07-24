@@ -1,0 +1,71 @@
+name: iOS CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Build and test
+    runs-on: macos-15
+    timeout-minutes: 35
+    env:
+      SIMULATOR_NAME: iPhone 16 Pro
+      DERIVED_DATA: ${{ github.workspace }}/build/DerivedData
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Xcode version
+        run: xcodebuild -version
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate project
+        run: ./Scripts/generate.sh
+
+      - name: Build
+        run: |
+          xcodebuild \
+            -project AirportXRCompanion.xcodeproj \
+            -scheme AirportXRCompanion \
+            -configuration Debug \
+            -destination "platform=iOS Simulator,name=$SIMULATOR_NAME" \
+            -derivedDataPath "$DERIVED_DATA" \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+      - name: Unit tests
+        run: |
+          xcodebuild \
+            -project AirportXRCompanion.xcodeproj \
+            -scheme AirportXRCompanion \
+            -configuration Debug \
+            -destination "platform=iOS Simulator,name=$SIMULATOR_NAME" \
+            -derivedDataPath "$DERIVED_DATA" \
+            CODE_SIGNING_ALLOWED=NO \
+            test -only-testing:AirportXRCompanionTests
+
+      - name: UI tests
+        run: |
+          xcodebuild \
+            -project AirportXRCompanion.xcodeproj \
+            -scheme AirportXRCompanion \
+            -configuration Debug \
+            -destination "platform=iOS Simulator,name=$SIMULATOR_NAME" \
+            -derivedDataPath "$DERIVED_DATA" \
+            CODE_SIGNING_ALLOWED=NO \
+            test -only-testing:AirportXRCompanionUITests
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xcresult
+          path: build/DerivedData/Logs/Test/*.xcresult
+          if-no-files-found: warn

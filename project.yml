@@ -1,0 +1,112 @@
+name: AirBorder
+options:
+  bundleIdPrefix: com.example
+  deploymentTarget:
+    iOS: "18.0"
+  xcodeVersion: "26.0"
+  createIntermediateGroups: true
+  groupSortPosition: top
+configs:
+  Debug: debug
+  Release: release
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    SWIFT_STRICT_CONCURRENCY: minimal
+    IPHONEOS_DEPLOYMENT_TARGET: "18.0"
+    TARGETED_DEVICE_FAMILY: "1"
+    CODE_SIGN_STYLE: Automatic
+    ENABLE_USER_SCRIPT_SANDBOXING: true
+    ENABLE_TESTABILITY: true
+    CODE_SIGN_ENTITLEMENTS: AirBorder/AirBorder.entitlements
+    CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED: true
+    GCC_TREAT_WARNINGS_AS_ERRORS: false
+targets:
+  AirBorder:
+    type: application
+    platform: iOS
+    sources:
+      - path: AirBorder
+        excludes:
+          - Preview Content
+    resources:
+      - path: AirBorder/Resources
+      - path: AirBorder/Assets.xcassets
+    configFiles:
+      Debug: Config/Debug.xcconfig
+      Release: Config/Release.xcconfig
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.AirportXRCompanion
+        PRODUCT_NAME: AirBorder
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        GENERATE_INFOPLIST_FILE: true
+        INFOPLIST_KEY_CFBundleDisplayName: AirBorder
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.travel
+        INFOPLIST_KEY_NSCameraUsageDescription: Camera access places private AR directions and airport markers in your surroundings. Frames stay on this device.
+        INFOPLIST_KEY_NSLocationWhenInUseUsageDescription: Your location helps estimate airport walking time and show nearby transit while you use the app.
+        INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription: With your permission, journey alerts can remind you to return when you are still away from your gate and flag a place you selected for this journey.
+        INFOPLIST_KEY_UIBackgroundModes:
+          - location
+        INFOPLIST_KEY_NSAppTransportSecurity_NSAllowsLocalNetworking: true
+        INFOPLIST_KEY_NSUserNotificationsUsageDescription: Notifications provide gate, boarding, delay, cancellation, and connection-risk updates for your linked journey.
+        INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription: With your explicit permission, Airport XR Companion updates and removes only its journey action events so gate and latest-return alerts can sync through your selected calendar account.
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: true
+        INFOPLIST_KEY_UILaunchScreen_Generation: true
+        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: true
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        INFOPLIST_KEY_AviationProxyBaseURL: $(AVIATION_PROXY_BASE_URL)
+        INFOPLIST_KEY_AviationProviderLabel: $(AVIATION_PROVIDER_LABEL)
+        INFOPLIST_KEY_CloudVisionProxyBaseURL: $(CLOUD_VISION_PROXY_BASE_URL)
+  AirportXRCompanionTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: AirportXRCompanionTests
+    resources:
+      - path: AirportXRCompanionTests/Fixtures
+    dependencies:
+      - target: AirBorder
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.AirportXRCompanionTests
+        GENERATE_INFOPLIST_FILE: true
+        TEST_HOST: $(BUILT_PRODUCTS_DIR)/AirBorder.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AirBorder
+        BUNDLE_LOADER: $(TEST_HOST)
+  AirportXRCompanionUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: AirportXRCompanionUITests
+    dependencies:
+      - target: AirBorder
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.AirportXRCompanionUITests
+        GENERATE_INFOPLIST_FILE: true
+        TEST_TARGET_NAME: AirBorder
+schemes:
+  AirBorder:
+    build:
+      targets:
+        AirBorder: all
+        AirportXRCompanionTests: [test]
+        AirportXRCompanionUITests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      debugEnabled: false
+      gatherCoverageData: true
+      targets:
+        - name: AirportXRCompanionTests
+        - name: AirportXRCompanionUITests
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release

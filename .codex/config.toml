@@ -1,0 +1,12 @@
+# AirportXRCompanion Codex orchestration defaults.
+# The root agent owns integration decisions and therefore uses the deep profile.
+model = "gpt-5.6"
+model_reasoning_effort = "high"
+
+[agents]
+# Keep delegation bounded and predictable for this repository.
+max_threads = 4
+# A named task parent may delegate once to a specialist; specialists must not fan out again.
+max_depth = 2
+job_max_runtime_seconds = 1800
+interrupt_message = true

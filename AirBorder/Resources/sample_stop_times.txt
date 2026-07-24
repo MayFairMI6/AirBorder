@@ -1,0 +1,4 @@
+trip_id,arrival_time,departure_time,stop_id,stop_sequence
+AIRPORT_CITY_01,10:00:00,10:02:00,AIRPORT,1
+AIRPORT_CITY_01,10:48:00,10:48:00,CITY,2
+

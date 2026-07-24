@@ -1,0 +1,803 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/ofy9wn61",
+    "id": "ofy9wn61",
+    "slide": 3,
+    "layoutId": "/ppt/slideLayouts/slideLayout1.xml",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#FFFFFF",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "fontScheme": {
+      "name": "Office",
+      "majorFont": {
+        "latinTypeface": "Calibri Light",
+        "eastAsianTypeface": "Calibri Light",
+        "complexScriptTypeface": "Calibri Light"
+      },
+      "minorFont": {
+        "latinTypeface": "Calibri",
+        "eastAsianTypeface": "Calibri",
+        "complexScriptTypeface": "Calibri"
+      }
+    },
+    "typefaces": [
+      "Calibri",
+      "Calibri Light"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout1.xml",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/x8nml0ra",
+      "id": "16",
+      "bbox": [
+        72,
+        42,
+        280,
+        24
+      ],
+      "geometry": "rect",
+      "text": "AIRBORDER",
+      "textPreview": "AIRBORDER",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "AIRBORDER"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "AIRBORDER",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#00666F",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "AIRBORDER",
+              "fontSize": 14,
+              "color": "#00666F",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cza94vmx",
+      "id": "2",
+      "bbox": [
+        72,
+        76,
+        980,
+        52
+      ],
+      "geometry": "rect",
+      "text": "Persona: an international traveler with a high-friction layover",
+      "textPreview": "Persona: an international traveler with a high-friction layover",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Persona: an international traveler with a high-friction"
+          },
+          {
+            "index": 2,
+            "text": "layover"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Persona: an international traveler with a high-friction layover",
+          "resolvedTextStyle": {
+            "fontSize": 38,
+            "color": "#111827",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Persona: an international traveler with a high-friction layover",
+              "fontSize": 38,
+              "color": "#111827",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d0jax03i",
+      "id": "3",
+      "bbox": [
+        72,
+        142,
+        1136,
+        3
+      ],
+      "geometry": "rect",
+      "fillColor": "#D7DCE2",
+      "lineColor": "#D7DCE2",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/298ryl4v",
+      "id": "4",
+      "bbox": [
+        72,
+        180,
+        330,
+        390
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#EEF7F7",
+      "lineColor": "#D7DCE2",
+      "lineWidth": 1
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3ah8rqlg",
+      "id": "5",
+      "bbox": [
+        108,
+        215,
+        260,
+        54
+      ],
+      "geometry": "rect",
+      "text": "Alex Chen",
+      "textPreview": "Alex Chen",
+      "resolvedFontSize": 40,
+      "resolvedTextStyle": {
+        "fontSize": 40,
+        "typeface": "Calibri",
+        "color": "#00666F",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Alex Chen"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Alex Chen",
+          "resolvedTextStyle": {
+            "fontSize": 40,
+            "color": "#00666F",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Alex Chen",
+              "fontSize": 40,
+              "color": "#00666F",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/obq90bml",
+      "id": "6",
+      "bbox": [
+        108,
+        286,
+        250,
+        145
+      ],
+      "geometry": "rect",
+      "text": "38-year-old Singaporean business traveler\nBangkok → Tokyo → Los Angeles\nTime-sensitive, budget-aware, carrying checked baggage",
+      "textPreview": "38-year-old Singaporean business traveler | Bangkok → Tokyo → Los Angeles | Time-sensitive, budget-aware, carrying checked baggage",
+      "resolvedFontSize": 20,
+      "resolvedTextStyle": {
+        "fontSize": 20,
+        "typeface": "Calibri",
+        "color": "#111827",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 7,
+        "lines": [
+          {
+            "index": 1,
+            "text": "38-year-old Singaporean"
+          },
+          {
+            "index": 2,
+            "text": "business traveler"
+          },
+          {
+            "index": 3,
+            "text": "Bangkok → Tokyo → Los"
+          },
+          {
+            "index": 4,
+            "text": "Angeles"
+          },
+          {
+            "index": 5,
+            "text": "Time-sensitive,"
+          },
+          {
+            "index": 6,
+            "text": "budget-aware, carrying"
+          },
+          {
+            "index": 7,
+            "text": "checked baggage"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "38-year-old Singaporean business traveler",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#111827"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "38-year-old Singaporean business traveler",
+              "fontSize": 20,
+              "color": "#111827"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "Bangkok → Tokyo → Los Angeles",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#111827"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Bangkok → Tokyo → Los Angeles",
+              "fontSize": 20,
+              "color": "#111827"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "Time-sensitive, budget-aware, carrying checked baggage",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#111827"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Time-sensitive, budget-aware, carrying checked baggage",
+              "fontSize": 20,
+              "color": "#111827"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pcjqtg36",
+      "id": "7",
+      "bbox": [
+        108,
+        470,
+        240,
+        70
+      ],
+      "geometry": "rect",
+      "text": "Success means she reaches boarding calmly, not just that she sees a list of places.",
+      "textPreview": "Success means she reaches boarding calmly, not just that she sees a list of places.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Success means she"
+          },
+          {
+            "index": 2,
+            "text": "reaches boarding calmly,"
+          },
+          {
+            "index": 3,
+            "text": "not just that she sees a list"
+          },
+          {
+            "index": 4,
+            "text": "of places."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Success means she reaches boarding calmly, not just that she sees a list of places.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#5B6472"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Success means she reaches boarding calmly, not just that she sees a list of places.",
+              "fontSize": 18,
+              "color": "#5B6472"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/m5cra54z",
+      "id": "8",
+      "bbox": [
+        470,
+        203,
+        12,
+        12
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#00666F",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/n6ls3alk",
+      "id": "9",
+      "bbox": [
+        498,
+        194,
+        652,
+        78
+      ],
+      "geometry": "rect",
+      "text": "Needs to know whether she must reclaim and recheck bags.",
+      "textPreview": "Needs to know whether she must reclaim and recheck bags.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Needs to know whether she must reclaim and recheck"
+          },
+          {
+            "index": 2,
+            "text": "bags."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Needs to know whether she must reclaim and recheck bags.",
+          "resolvedTextStyle": {
+            "fontSize": 25,
+            "color": "#111827"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Needs to know whether she must reclaim and recheck bags.",
+              "fontSize": 25,
+              "color": "#111827"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/n2l4fq98",
+      "id": "10",
+      "bbox": [
+        470,
+        285,
+        12,
+        12
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#00666F",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/m1c3mlsn",
+      "id": "11",
+      "bbox": [
+        498,
+        276,
+        652,
+        78
+      ],
+      "geometry": "rect",
+      "text": "Wants a work pod, shower, affordable food, or a short city visit if time allows.",
+      "textPreview": "Wants a work pod, shower, affordable food, or a short city visit if time allows.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Wants a work pod, shower, affordable food, or a short"
+          },
+          {
+            "index": 2,
+            "text": "city visit if time allows."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Wants a work pod, shower, affordable food, or a short city visit if time allows.",
+          "resolvedTextStyle": {
+            "fontSize": 25,
+            "color": "#111827"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Wants a work pod, shower, affordable food, or a short city visit if time allows.",
+              "fontSize": 25,
+              "color": "#111827"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/943mhgre",
+      "id": "12",
+      "bbox": [
+        470,
+        367,
+        12,
+        12
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#00666F",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/83ulovat",
+      "id": "13",
+      "bbox": [
+        498,
+        358,
+        652,
+        78
+      ],
+      "geometry": "rect",
+      "text": "Prefers clear route steps over technical confidence labels.",
+      "textPreview": "Prefers clear route steps over technical confidence labels.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Prefers clear route steps over technical confidence"
+          },
+          {
+            "index": 2,
+            "text": "labels."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Prefers clear route steps over technical confidence labels.",
+          "resolvedTextStyle": {
+            "fontSize": 25,
+            "color": "#111827"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Prefers clear route steps over technical confidence labels.",
+              "fontSize": 25,
+              "color": "#111827"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/v6l4jq94",
+      "id": "14",
+      "bbox": [
+        470,
+        449,
+        12,
+        12
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#00666F",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/a5c3ql8z",
+      "id": "15",
+      "bbox": [
+        498,
+        440,
+        652,
+        78
+      ],
+      "geometry": "rect",
+      "text": "Needs entry and transit information in plain language, with links kept inside the app.",
+      "textPreview": "Needs entry and transit information in plain language, with links kept inside the app.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Needs entry and transit information in plain language,"
+          },
+          {
+            "index": 2,
+            "text": "with links kept inside the app."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Needs entry and transit information in plain language, with links kept inside the app.",
+          "resolvedTextStyle": {
+            "fontSize": 25,
+            "color": "#111827"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Needs entry and transit information in plain language, with links kept inside the app.",
+              "fontSize": 25,
+              "color": "#111827"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

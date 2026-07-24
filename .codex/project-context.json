@@ -1,0 +1,642 @@
+{
+  "schema_version": "1.0",
+  "project": {
+    "name": "AirportXRCompanion",
+    "workspace": "/Users/anony/Downloads/AirportXRCompanion",
+    "objective": "Deliver a polished native iPhone companion for long-haul international, same-airport, and inter-airport layovers with provider-neutral live data, conservative sourced recommendations, accessible guidance, offline behavior, tests, simulator evidence, and a reproducible research report.",
+    "updated_at": "2026-07-16T22:25:00Z"
+  },
+  "current_focus": "AR guidance now derives straight, slight, standard, sharp, and U-turn instructions plus eight-way compass headings from terminal-graph geometry. Independent QA movement can be delivered either by loopback polling or through Apple Simulator Core Location using simctl location and CLLocationManager; the Core Location footprint is an explicit synthetic HND fixture and floor is graph-derived. The current app tree type-checks against the iOS Simulator SDK, scripts validate, the Core Location command dry-run passes, and the 47-page report was re-exported and visually inspected. Project-owned DerivedData was removed, leaving about 1.5 GiB free; a fresh Xcode build, new unit/UI tests, and simulator delivery remain blocked below the 5 GiB build floor.",
+  "acceptance_criteria": [
+    {
+      "id": "accept-longhaul-itinerary",
+      "priority": "P0",
+      "statement": "The app supports ordered timezone-aware multi-leg itineraries, independent layovers, overnight/date-line trips, and the populated BKK-HND-LAX reference scenario.",
+      "status": "active",
+      "evidence": ["User-approved implementation plan, 2026-07-14", "AirportXRCompanion/Models/LongHaul/ItineraryModels.swift:65", "AirportXRCompanion/Services/LongHaul/LongHaulReferenceScenario.swift:3"]
+    },
+    {
+      "id": "accept-interairport",
+      "priority": "P0",
+      "statement": "Airport changes are detected automatically from a versioned multi-airport metro registry; HND to NRT is the complete reference transfer, mandatory transfer precedes optional visits, and a fastest claim requires complete current route evidence.",
+      "status": "active",
+      "evidence": ["User additions, 2026-07-14", "AirportXRCompanion/Models/LongHaul/MetroAirportDatabase.swift:27", "AirportXRCompanion/Models/LongHaul/InterAirportTransferModels.swift:20", "AirportXRCompanion/Services/LongHaul/LongHaulReferenceScenario.swift:109"]
+    },
+    {
+      "id": "accept-conservative-decisions",
+      "priority": "P0",
+      "statement": "Every layover recommendation derives available and required time from sourced distributions; unknown or expired entry, queue, boarding-cutoff, or transfer facts stay unknown and prevent a positive city recommendation.",
+      "status": "active",
+      "evidence": ["User-approved implementation plan, 2026-07-14", "AirportXRCompanion/Services/LongHaul/MonteCarloLayoverRecommendationEngine.swift:29"]
+    },
+    {
+      "id": "accept-six-tabs-flows",
+      "priority": "P1",
+      "statement": "Preserve six roots—Journey, Flights, AR Guide, Map, Layover & Transit, Settings—and implement itinerary, in-flight/OCR, layover decision, facilities/hotel/work, entry, city feasibility, transfer, and calculation-trace flows.",
+      "status": "active",
+      "evidence": ["User-approved implementation plan, 2026-07-14", "AirportXRCompanion/App/RootTabView.swift:7"]
+    },
+    {
+      "id": "accept-provider-stack",
+      "priority": "P1",
+      "statement": "The production architecture supports normalized flight, hotel, activity, facility, entry, transit, weather, and place providers through a secret-holding proxy or native frameworks, while every UI value is labeled live, cached, stale, demo, or unknown.",
+      "status": "active",
+      "evidence": ["User-approved implementation plan, 2026-07-14", "Backend/src/index.js:161", "AirportXRCompanion/Components/LongHaulInterfaceComponents.swift:3"]
+    },
+    {
+      "id": "accept-learning",
+      "priority": "P0",
+      "statement": "On-device predictive models may learn from user-owned outcomes and from live provider fields only when the exact provider contract/policy permits training; learning is versioned, attributable, disableable, erasable, and never learns entry rules or weakens the safety floor.",
+      "status": "active",
+      "evidence": ["User correction: live data can also be learned, 2026-07-14", "Earlier approved plan limits commercial payload training to contracts that explicitly permit it"]
+    },
+    {
+      "id": "accept-testing",
+      "priority": "P0",
+      "statement": "Final acceptance requires a terminal build of the current generated project, deterministic automated tests passing, opt-in non-gating live contract tests, and a normal iPhone simulator launch with screenshot/log review; physical-device AR is reported separately.",
+      "status": "active",
+      "evidence": ["User-approved implementation plan, 2026-07-14"]
+    },
+    {
+      "id": "accept-report",
+      "priority": "P1",
+      "statement": "Create Documentation/Reports/2026-07-14-airportxr-long-haul-layover.md and a deterministic Markdown/PDF/provenance trio under output/pdf/2026-07-14-airportxr-long-haul-layover, with rendered-page inspection, hashes, design rationale, evidence, validation, limitations, and reproduction steps.",
+      "status": "active",
+      "evidence": ["User-approved implementation plan, 2026-07-14"]
+    },
+    {
+      "id": "accept-research-ui",
+      "priority": "P1",
+      "statement": "UI decisions are based on relevant first-party industry research, documented with rationale and accessibility implications, and represented in editable Figma wireframes where the available plan permits.",
+      "status": "active",
+      "evidence": ["User additions, 2026-07-14", "Documentation/UIUXReview.md:22", "Documentation/UIUXReview.md:395"]
+    }
+  ],
+  "constraints": [
+    {
+      "id": "scope-workspace",
+      "priority": "P0",
+      "statement": "Modify only /Users/anony/Downloads/AirportXRCompanion; leave /Users/anony/Downloads/airborder and the supplied TransitSphere PDF untouched.",
+      "status": "active",
+      "evidence": ["User-approved implementation plan, 2026-07-14"]
+    },
+    {
+      "id": "terminal-only",
+      "priority": "P0",
+      "statement": "Create, build, test, and operate simulators from VS Code/terminal; do not open the Xcode graphical interface.",
+      "status": "active",
+      "evidence": ["Initial attached project request"]
+    },
+    {
+      "id": "secret-boundary",
+      "priority": "P0",
+      "statement": "Never ship or log provider secrets. Worker secret names include AMADEUS_CLIENT_ID, AMADEUS_CLIENT_SECRET, optional FLIGHTAWARE_AEROAPI_KEY, SHERPA_API_KEY or Timatic credentials, GOOGLE_PLACES_API_KEY, TRANSITLAND_API_KEY, and GOOGLE_VISION_API_KEY; the app receives only HTTPS proxy URLs through ignored Config/Secrets.xcconfig. MapKit needs no app key; native WeatherKit uses entitlement.",
+      "status": "active",
+      "evidence": ["User-approved implementation plan, 2026-07-14", ".gitignore:9", "Config/Secrets.xcconfig.example:3"]
+    },
+    {
+      "id": "entry-privacy-floor",
+      "priority": "P0",
+      "statement": "Entry guidance is informational and links to official verification; never promise admission, collect passport numbers/scans, or let an expired result authorize a city visit.",
+      "status": "active",
+      "evidence": ["User-approved implementation plan, 2026-07-14", "AirportXRCompanion/Models/LongHaul/TravelerEntryModels.swift", "AirportXRCompanion/Services/LongHaul/MonteCarloLayoverRecommendationEngine.swift:86"]
+    },
+    {
+      "id": "safety-floor",
+      "priority": "P0",
+      "statement": "User preference or learned state may make plans more conservative but can never weaken deterministic safety, freshness, accessibility, entry, boarding, or return constraints.",
+      "status": "active",
+      "evidence": ["User-approved implementation plan, 2026-07-14", "AirportXRCompanion/ViewModels/LongHaulExperienceViewModel.swift:354"]
+    },
+    {
+      "id": "provider-license-floor",
+      "priority": "P0",
+      "statement": "Caching, persistence, redistribution, and training are field/provider specific and must follow a versioned policy and actual contract; Google Places remains ephemeral except where permitted, and visa/entry rules are never a learned model target.",
+      "status": "active",
+      "evidence": ["User-approved implementation plan, 2026-07-14", "AirportXRCompanion/Models/LongHaul/ProviderModels.swift:20"]
+    },
+    {
+      "id": "demo-labeling",
+      "priority": "P0",
+      "statement": "Fabricated operational numbers exist only in named demo/test fixtures and are visibly distinguished from live facts; a demo route cannot be called current fastest.",
+      "status": "active",
+      "evidence": ["User-approved implementation plan, 2026-07-14", "Documentation/UIUXReview.md:14"]
+    },
+    {
+      "id": "vision-research-only",
+      "priority": "P0",
+      "statement": "Seatback OCR is local/offline by default and window-view geolocation is experimental only; neither may drive visa, boarding, city-safety, or navigation decisions without independent confirmation.",
+      "status": "active",
+      "evidence": ["User-approved implementation plan, 2026-07-14", "AirportXRCompanion/Views/Journey/InFlightProgressView.swift"]
+    },
+    {
+      "id": "no-payments",
+      "priority": "P1",
+      "statement": "Hotel and activity booking remains an external deep link; no in-app payments. Day-room/transit-hotel claims require an explicit official/operator record.",
+      "status": "active",
+      "evidence": ["User-approved implementation plan, 2026-07-14"]
+    },
+    {
+      "id": "deterministic-ci",
+      "priority": "P1",
+      "statement": "Deterministic fixture tests are required CI; credential-gated live contract tests are opt-in, never log private payloads, and never gate CI.",
+      "status": "active",
+      "evidence": ["User-approved implementation plan, 2026-07-14"]
+    },
+    {
+      "id": "disk-floor",
+      "priority": "P1",
+      "statement": "Recheck at least 5 GB free before rebuilding; clean only AirportXRCompanion-owned build artifacts by default.",
+      "status": "active",
+      "evidence": ["User-approved implementation plan, 2026-07-14"]
+    }
+  ],
+  "decisions": [
+    {
+      "id": "decision-global-hnd-reference",
+      "priority": "P1",
+      "decision": "Use global provider-neutral interfaces with HND as the fully populated reference airport and BKK-HND-LAX plus HND-NRT as named scenarios.",
+      "rationale": "This proves the complete product flow without implying unsupported global facility completeness.",
+      "status": "implemented",
+      "source": "User-approved defaults and later HND-NRT addition, 2026-07-14",
+      "evidence": ["AirportXRCompanion/Services/LongHaul/LongHaulReferenceScenario.swift:3", "AirportXRCompanion/Models/LongHaul/ProviderModels.swift:47"]
+    },
+    {
+      "id": "decision-safety-policy",
+      "priority": "P0",
+      "decision": "Centralize deterministic policy at version layover-safety-2026-07-14-v1: safe when Wilson 95% lower bound is at least 0.90, not recommended when upper bound is below 0.70, otherwise tight; unresolved critical inputs require confirmation; use 10,000 trials for the approximately 9,604 worst-case precision derivation.",
+      "rationale": "The thresholds are explicit, reproducible, reviewable, and conservative under uncertainty.",
+      "status": "implemented",
+      "source": "User-approved implementation plan, 2026-07-14",
+      "evidence": ["AirportXRCompanion/Services/LongHaul/SafetyPolicy.swift:4", "AirportXRCompanion/Services/LongHaul/MonteCarloLayoverRecommendationEngine.swift:118"]
+    },
+    {
+      "id": "decision-determinism-stochastic",
+      "priority": "P1",
+      "decision": "Identical production snapshots derive a stable seed; live launches vary naturally; DEBUG QA stochastic mode uses an unseeded generated seed that is logged and replayable.",
+      "rationale": "This separates reproducible decision logic from changing live context and enables exact bug replay.",
+      "status": "implemented",
+      "source": "User clarification about non-deterministic launches and approved plan, 2026-07-14",
+      "evidence": ["AirportXRCompanion/Services/LongHaul/SafetyPolicy.swift:38", "AirportXRCompanion/Configuration/AppLaunchContext.swift:38", "Scripts/run-simulator.sh:10"]
+    },
+    {
+      "id": "decision-pareto-routing",
+      "priority": "P1",
+      "decision": "Use Pareto filtering and lexicographic cost vectors for terminal and inter-airport routing instead of hidden scalar penalties.",
+      "rationale": "Fastest, accessible, least-walking, simplest, and low-crowd tradeoffs remain inspectable rather than hidden in magic weights.",
+      "status": "implemented",
+      "source": "User-approved implementation plan, 2026-07-14",
+      "evidence": ["AirportXRCompanion/Routing/TerminalRouter.swift", "AirportXRCompanion/Models/LongHaul/InterAirportTransferModels.swift:65"]
+    },
+    {
+      "id": "decision-learning-user-only",
+      "priority": "P0",
+      "decision": "Persisted personalization learns only from explicit user-owned outcomes; normalized live provider responses never train the model.",
+      "rationale": "This was adopted to avoid unauthorized commercial-payload training and fabricated baselines.",
+      "status": "superseded",
+      "source": "Earlier implementation correction captured in attached text, 2026-07-14",
+      "evidence": ["AirportXRCompanion/App/AppContainer.swift:45", "AirportXRCompanion/Services/OnDevicePredictionService.swift:82"]
+    },
+    {
+      "id": "decision-learning-policy-gated-live",
+      "priority": "P0",
+      "decision": "Permit on-device learning from live observations as well as user-owned outcomes when the exact provider/field policy explicitly permits training; preserve source/policy provenance, consent controls, disable/erase behavior, safety isolation, and the ban on learned entry rules.",
+      "rationale": "Live data can improve failure resilience and recommendations, but authorization differs by provider and field and must remain enforceable.",
+      "status": "verified",
+      "source": "Latest user correction: ‘it can learn from live data too’, 2026-07-14",
+      "supersedes": ["decision-learning-user-only"],
+      "evidence": ["AirportXRCompanion/Models/LongHaul/ProviderModels.swift:20", "AirportXRCompanion/Aviation/Repositories/FlightRepository.swift:100", "AirportXRCompanion/Services/OnDevicePredictionService.swift:89", "/tmp/AirportXRLearningDerivedData/Logs/Test/Test-AirportXRCompanion-2026.07.14_06-42-58--0400.xcresult: 15 targeted tests passed, 0 failed"]
+    },
+    {
+      "id": "decision-metro-registry",
+      "priority": "P1",
+      "decision": "Use a versioned offline metro-airport registry for automatic transfer detection, sourced for airport codes from public-domain OurAirports while treating metro grouping as curated and travel times as provider-derived.",
+      "rationale": "Airport-change detection must work offline without converting a geographic grouping into a fabricated journey duration.",
+      "status": "implemented",
+      "source": "Latest inter-airport user requirements, 2026-07-14",
+      "evidence": ["AirportXRCompanion/Models/LongHaul/MetroAirportDatabase.swift:27", "https://ourairports.com/data/"]
+    },
+    {
+      "id": "decision-native-nearby",
+      "priority": "P2",
+      "decision": "Use native MapKit POI discovery for nearby places and optional Amadeus for availability; keep official/operator records distinct from discovery and booking claims.",
+      "rationale": "MapKit provides keyless native discovery while availability and facility access need different evidence.",
+      "status": "implemented",
+      "source": "User-approved implementation plan, 2026-07-14",
+      "evidence": ["AirportXRCompanion/Services/LongHaul/MapKitNearbyPlaceProvider.swift", "AirportXRCompanion/Services/LongHaul/ProxyLayoverProviders.swift"]
+    },
+    {
+      "id": "decision-ui-research",
+      "priority": "P1",
+      "decision": "Lead task screens with the safest next action, consequence, deadline, data mode, and freshness; progressively disclose formulas/provider detail; retain native SwiftUI semantics and research-backed travel patterns.",
+      "rationale": "Travel-day interfaces must reduce decision cost under stress without hiding uncertainty or provenance.",
+      "status": "accepted",
+      "source": "UI/UX research review and user request for design rationale, 2026-07-14",
+      "evidence": ["Documentation/UIUXReview.md:8", "https://developer.apple.com/news/?id=970ncww4", "https://developer.apple.com/design/human-interface-guidelines/tab-bars"]
+    },
+    {
+      "id": "decision-indoor-position-fusion",
+      "priority": "P1",
+      "decision": "Use local venue map point plus floor as the indoor-location boundary. Support in-app graph replay, independently clocked loopback polling, and an Apple Simulator Core Location QA transport. Core Location indoor QA is allowed only through the versioned synthetic HND transform; floor comes from the matched graph node. Accept venue IMDF positioning, beacon proximity, UWB, or surveyed visual anchors through future production adapters; keep ARKit camera-relative until a production venue transform exists.",
+      "rationale": "Apple Core Location provides a realistic simulator delivery channel but latitude/longitude alone cannot identify an airport floor or corridor. The explicit QA transform exercises the app pipeline without presenting synthetic coordinates as surveyed airport geometry, while one local-coordinate reading shape keeps routing and AR provider-neutral.",
+      "status": "implemented",
+      "source": "User request and Apple primary-source indoor-location research, 2026-07-16",
+      "evidence": ["AirportXRCompanion/Localization/ManualLocalizationService.swift", "AirportXRCompanion/Views/ARGuide/ARGuideView.swift", "Scripts/indoor-signal-emulator.py", "Scripts/run-simulator.sh", "Documentation/IndoorPositioningArchitecture.md", "https://developer.apple.com/documentation/xcode/simulating-location-in-tests", "https://developer.apple.com/documentation/xcuiautomation/xcuilocation", "https://developer.apple.com/documentation/corelocation/cllocation/floor", "https://developer.apple.com/documentation/mapkit/displaying-an-indoor-map"]
+    },
+    {
+      "id": "decision-airline-flight-hierarchy",
+      "priority": "P1",
+      "decision": "Use one shared boarding-pass-style flight summary in Journey and Flights: flight/status, airport codes, separate endpoint-local times and short dates, city/terminal/gate, explicit day offset, then boarding time/gate/group.",
+      "rationale": "This matches the information hierarchy documented by Apple Wallet and major airline day-of-travel apps while removing the ambiguous long cross-time-zone date sentence.",
+      "status": "implemented",
+      "source": "User redesign request and first-party airline/Apple research, 2026-07-16",
+      "evidence": ["AirportXRCompanion/Components/InterfaceComponents.swift", "AirportXRCompanion/Views/Journey/JourneyDashboardView.swift", "AirportXRCompanion/Views/Flights/FlightsView.swift", "Documentation/UIUXReview.md", "https://developer.apple.com/videos/play/wwdc2025/202/"]
+    }
+  ],
+  "workstreams": [
+    {
+      "id": "work-domain-safety",
+      "priority": "P0",
+      "name": "Itinerary, provenance, safety, and transfer domain",
+      "status": "verified",
+      "truth": "Provider-neutral itinerary, provenance, safety, cache, HND facilities, HND-NRT transfer planning, and the 25-record metro registry are included in the current project. The full build passes and all 21 LongHaulExpansionTests pass after correcting stale test assumptions to the official landside work-pod and exact-hours truth.",
+      "evidence": ["AirportXRCompanion/Models/LongHaul", "AirportXRCompanion/Services/LongHaul", "AirportXRCompanion/Persistence/ItineraryCache.swift", "build/current-build.log: BUILD SUCCEEDED", "build/current-unit-tests-rerun.log: LongHaulExpansionTests executed 21 tests with 0 failures", "AirportXRCompanionTests/LongHaulExpansionTests.swift:344"],
+      "next": "Preserve this domain verification while completing UI, live-contract, simulator, and report acceptance."
+    },
+    {
+      "id": "work-live-learning",
+      "priority": "P0",
+      "name": "Policy-gated live learning",
+      "status": "verified",
+      "truth": "Learning is default-deny and dual-authorized by the bundled policy registry plus normalized source metadata for an exact purpose. Only live, non-demo flights with stable record IDs and resolved scheduled/actual departures train; refreshes are deterministically deduplicated; persistence keeps aggregate residuals and one-way IDs rather than raw provider payloads. Entry/visa has no training purpose. All current commercial policies deny training until a verified contract is recorded.",
+      "evidence": ["AirportXRCompanion/Models/LongHaul/ProviderModels.swift:20", "AirportXRCompanion/Models/FlightModels.swift:47", "AirportXRCompanion/Aviation/Mapping/FlightDataMapper.swift:95", "AirportXRCompanion/Aviation/Repositories/FlightRepository.swift:100", "AirportXRCompanion/App/AppContainer.swift:45", "AirportXRCompanion/Services/OnDevicePredictionService.swift:89", "AirportXRCompanionTests/TransitNotificationPredictionTests.swift:99", "AirportXRCompanionTests/TransitNotificationPredictionTests.swift:152", "/tmp/AirportXRLearningDerivedData/Logs/Test/Test-AirportXRCompanion-2026.07.14_06-42-58--0400.xcresult"],
+      "next": "Keep actual commercial policies denied unless an operator verifies the exact contractual use; include these targeted results in the later full-suite run and report."
+    },
+    {
+      "id": "work-ios-ui",
+      "priority": "P1",
+      "name": "SwiftUI long-haul experience",
+      "status": "implemented",
+      "truth": "The last verified build contains the six principal roots and long-haul flows. Current type-checked but unbuilt source adds graph-derived straight/slight/standard/sharp/U-turn and eight-way compass guidance; graph-route replay; an independent loopback feed; an Apple Simulator Core Location transport with a versioned synthetic HND transform; and a shared airline-style flight card. All synthetic movement paths are explicit UI-test-only. Physical-device AR and real venue positioning remain separate exercises.",
+      "evidence": ["AirportXRCompanion/Localization/ManualLocalizationService.swift", "AirportXRCompanion/Configuration/AppLaunchContext.swift", "AirportXRCompanion/Views/ARGuide/ARGuideView.swift", "Scripts/indoor-signal-emulator.py", "Scripts/run-simulator.sh", "AirportXRCompanion/Components/InterfaceComponents.swift", "Documentation/IndoorPositioningArchitecture.md"],
+      "next": "Restore at least 5 GiB free space, build current source, run the maneuver/Core Location unit cases and Journey/AR UI cases, then visually inspect arrow direction changes in AR and the expanded route-step list."
+    },
+    {
+      "id": "work-backend",
+      "priority": "P1",
+      "name": "Cloudflare provider proxy",
+      "status": "verified",
+      "truth": "Normalized Worker routes and policy boundaries pass the static check, all 37 deterministic mocked tests, and a Wrangler dry run. Protected production deployment and native Cloudflare Access authentication remain external work.",
+      "evidence": ["build/final-backend-check.log", "build/final-backend-tests.log", "build/final-wrangler-dry-run.log"],
+      "next": "Run opt-in redacted contract tests only when credentials and provider agreements are available."
+    },
+    {
+      "id": "work-tests",
+      "priority": "P0",
+      "name": "Automated verification",
+      "status": "verified",
+      "truth": "The earlier fresh full suite passed, and the latest completed pre-walkthrough build plus 88 unit tests passed. Current source adds richer maneuver/compass boundary tests, Core Location fixture round-trip tests, explicit-QA launch assertions, and prior indoor-emulator/airline-summary assertions. All app sources type-check against the iOS Simulator SDK; all app/test Swift parses; Python compiles; shell syntax, project regeneration, and diff checks pass; and the Core Location driver emits the expected simctl command in dry-run. No Xcode build, XCTest, or simulator-delivery result exists for these newest edits because the disk floor is not met.",
+      "evidence": ["build/post-clean-ui-tests.log", "build/ar-weather-dynamic-build.log", "build/ar-weather-dynamic-unit-tests.log", "Scripts/indoor-signal-emulator.py observed at 127.0.0.1:8876 on 2026-07-16", "Scripts/run-simulator.sh ar-external absent-feed preflight observed 2026-07-16", "AirportXRCompanionTests/LongHaulExpansionTests.swift", "AirportXRCompanionUITests/AirportXRCompanionUITests.swift"],
+      "next": "Restore at least 5 GiB free space, then build, run the maneuver/Core Location unit cases and focused AR/walkthrough UI tests, launch ar-corelocation with the independent driver, inspect arrows/screenshots, and rerun the complete UI suite."
+    },
+    {
+      "id": "work-cloud-ci",
+      "priority": "P1",
+      "name": "Cloud build and test configuration",
+      "status": "implemented",
+      "truth": "Repository-side GitHub Actions macOS CI and Xcode Cloud post-clone/pre-build hooks are present and syntax-validated. No remote repository or App Store Connect/Xcode Cloud account configuration exists in this workspace, so hosted runs have not yet been triggered.",
+      "evidence": [".github/workflows/ios-ci.yml", "ci_scripts/ci_post_clone.sh", "ci_scripts/ci_pre_xcodebuild.sh", "README.md"],
+      "next": "Push to a Git remote, enable Actions or connect the repository in App Store Connect, select an Xcode/simulator-compatible image, then inspect the first hosted run."
+    },
+    {
+      "id": "work-uiux-figma",
+      "priority": "P1",
+      "name": "Research-led UI/UX and Figma",
+      "status": "blocked",
+      "truth": "A research-backed review and editable Figma foundations file exist; seven requested product screen frames were not created or validated because the authenticated Figma Starter MCP quota was exhausted.",
+      "evidence": ["Documentation/UIUXReview.md:6", "https://www.figma.com/design/MgNQlseRuiBCZvDjXnsvHi", "Documentation/UIUXReview.md:395"],
+      "next": "Apply code-review findings now; after quota reset, create and validate seven annotated phone frames from the documented wireframes."
+    },
+    {
+      "id": "work-report",
+      "priority": "P1",
+      "name": "Research report and PDF provenance",
+      "status": "complete",
+      "truth": "The canonical report now includes the airline flight-information hierarchy, richer graph-derived maneuver language, and loopback plus Apple Core Location indoor-QA architectures. The deterministic branded export produced 47 rendered pages; all four contact sheets and affected pages 8, 40, and 41 were visually inspected without clipping. Provenance hashes match the generated Markdown and PDF.",
+      "evidence": ["Documentation/Reports/2026-07-14-airportxr-long-haul-layover.md", "Documentation/IndoorPositioningArchitecture.md", "Documentation/UIUXReview.md", "output/pdf/2026-07-14-airportxr-long-haul-layover/2026-07-14-airportxr-long-haul-layover.md: sha256 0f6844811901596920e690686f17551b2970a4293fca5e6a7384c4a9ad401f23", "output/pdf/2026-07-14-airportxr-long-haul-layover/2026-07-14-airportxr-long-haul-layover.pdf: sha256 63a776044baa97ae1d212944c2774c48db44b7869f5c8da1cd3b80a2e4358d25", "output/pdf/2026-07-14-airportxr-long-haul-layover/2026-07-14-airportxr-long-haul-layover.provenance.json", "output/pdf/2026-07-14-airportxr-long-haul-layover/rendered/page-08.png", "output/pdf/2026-07-14-airportxr-long-haul-layover/rendered/page-40.png", "output/pdf/2026-07-14-airportxr-long-haul-layover/rendered/page-41.png"],
+      "next": "Regenerate the report only when source, evidence, or documented limitations change."
+    },
+    {
+      "id": "work-simulator",
+      "priority": "P0",
+      "name": "Simulator and UI acceptance",
+      "status": "verified",
+      "truth": "Ordinary launches without --uitesting were visually reviewed in demo, offline, stochastic, live-requested, and HND-NRT inter-airport modes; five screenshots and a structured log exist.",
+      "evidence": ["build/final-normal-simulator.log", "Documentation/Screenshots/2026-07-14-final-acceptance/"],
+      "next": "Keep the simulator available for user testing and validate AR separately on physical hardware."
+    }
+  ],
+  "verification": [
+    {
+      "id": "verify-baseline-build",
+      "priority": "P1",
+      "kind": "iOS build",
+      "status": "passed",
+      "command": "xcodebuild -project AirportXRCompanion.xcodeproj -scheme AirportXRCompanion -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 17 Pro' -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO build",
+      "result": "BUILD SUCCEEDED at 2026-07-14T10:20:32Z, but many current source/test files were modified afterward; this does not verify the current tree.",
+      "observed_at": "2026-07-14T10:20:32Z",
+      "evidence": ["build/compile-check.log"]
+    },
+    {
+      "id": "verify-current-build",
+      "priority": "P0",
+      "kind": "iOS current-tree build",
+      "status": "passed",
+      "command": "xcodebuild -project AirportXRCompanion.xcodeproj -scheme AirportXRCompanion -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 17 Pro' -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO build",
+      "result": "The regenerated current application target built successfully for the iPhone 17 Pro simulator.",
+      "observed_at": "2026-07-14T10:45:02Z",
+      "evidence": ["build/current-build.log"]
+    },
+    {
+      "id": "verify-tests-existing-result",
+      "priority": "P0",
+      "kind": "XCTest result audit",
+      "status": "inconclusive",
+      "command": "xcrun xcresulttool get test-results summary --path build/DerivedData/Logs/Test/Test-AirportXRCompanion-2026.07.14_05-16-44--0400.xcresult",
+      "result": "The only observed result is unknown with totalTestCount 0, passedTests 0, and failedTests 0; it proves no tests passed.",
+      "observed_at": "2026-07-14T10:36:37Z",
+      "evidence": ["build/DerivedData/Logs/Test/Test-AirportXRCompanion-2026.07.14_05-16-44--0400.xcresult"]
+    },
+    {
+      "id": "verify-learning-targeted-tests",
+      "priority": "P0",
+      "kind": "Targeted iOS learning and flight-data tests",
+      "status": "passed",
+      "command": "xcodebuild test -project AirportXRCompanion.xcodeproj -scheme AirportXRCompanion -destination 'platform=iOS Simulator,name=iPhone 17 Pro' -derivedDataPath /tmp/AirportXRLearningDerivedData CODE_SIGNING_ALLOWED=NO -only-testing:AirportXRCompanionTests/TransitNotificationPredictionTests -only-testing:AirportXRCompanionTests/FlightDataTests",
+      "result": "15 of 15 targeted tests passed with zero failures on iPhone 17 Pro simulator, covering policy-authorized learning, denial on policy/source mismatch, deterministic deduplication, disable/erase, mapping, cache, fallback, rate limiting, freshness, GTFS, notifications, and user personalization. This is not the full suite.",
+      "observed_at": "2026-07-14T10:43:56Z",
+      "evidence": ["/tmp/AirportXRLearningDerivedData/Logs/Test/Test-AirportXRCompanion-2026.07.14_06-42-58--0400.xcresult", "AirportXRCompanionTests/FlightDataTests.swift", "AirportXRCompanionTests/TransitNotificationPredictionTests.swift"]
+    },
+    {
+      "id": "verify-full-units-initial",
+      "priority": "P1",
+      "kind": "Full deterministic unit tests, initial run",
+      "status": "failed",
+      "command": "xcodebuild -project AirportXRCompanion.xcodeproj -scheme AirportXRCompanion -destination 'platform=iOS Simulator,name=iPhone 17 Pro' -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO test -only-testing:AirportXRCompanionTests",
+      "result": "46 tests executed with two assertion failures in testHNDOfficialFacilitiesExposeExpectedZonesAndOfficialSources because the test still expected the pre-research work-pod zone and hours behavior. Product code was not reverted; the stale test was corrected to official landside and exact-hours truth.",
+      "observed_at": "2026-07-14T10:45:54Z",
+      "evidence": ["build/current-unit-tests.log", "AirportXRCompanionTests/LongHaulExpansionTests.swift:344"]
+    },
+    {
+      "id": "verify-full-units-rerun",
+      "priority": "P0",
+      "kind": "Full deterministic unit tests, corrected rerun",
+      "status": "passed",
+      "command": "xcodebuild -project AirportXRCompanion.xcodeproj -scheme AirportXRCompanion -destination 'platform=iOS Simulator,name=iPhone 17 Pro' -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO test -only-testing:AirportXRCompanionTests",
+      "result": "All 46 unit tests passed with zero failures: FlightDataTests 6, LongHaulExpansionTests 21, RiskAndRoutingTests 10, and TransitNotificationPredictionTests 9. UI tests were not included.",
+      "observed_at": "2026-07-14T10:47:34Z",
+      "evidence": ["build/current-unit-tests-rerun.log", "build/DerivedData/Logs/Test/Test-AirportXRCompanion-2026.07.14_06-46-56--0400.xcresult"]
+    },
+    {
+      "id": "verify-backend-syntax",
+      "priority": "P1",
+      "kind": "Backend syntax",
+      "status": "passed",
+      "command": "node --check Backend/src/index.js",
+      "result": "Current Worker source, including versioned provider-policy training metadata, parses successfully.",
+      "observed_at": "2026-07-14T10:44:51Z",
+      "evidence": ["Backend/src/index.js"]
+    },
+    {
+      "id": "verify-backend-tests",
+      "priority": "P1",
+      "kind": "Backend tests",
+      "status": "passed",
+      "command": "npm test",
+      "result": "All 37 deterministic mocked Cloudflare Worker tests passed with zero failures; static check and Wrangler dry-run also passed.",
+      "observed_at": "2026-07-14T21:01:20Z",
+      "evidence": ["build/final-backend-tests.log", "build/final-backend-check.log", "build/final-wrangler-dry-run.log"]
+    },
+    {
+      "id": "verify-rich-ar-core-location-source",
+      "priority": "P0",
+      "kind": "Current AR/Core Location source validation",
+      "status": "passed",
+      "command": "swiftc -typecheck against iOS Simulator SDK; swiftc -parse app/tests; py_compile; indoor-signal-emulator.py --transport core-location --device booted --dry-run; zsh -n; git diff --check",
+      "result": "All app sources type-checked; all app/test Swift parsed; Python and shell validation passed; project regenerated; diff check passed; driver emitted xcrun simctl location booted set 35.54975885,139.78589806. This is not an Xcode build, XCTest, or simulator-delivery result.",
+      "observed_at": "2026-07-16T22:18:00Z",
+      "evidence": ["AirportXRCompanion/Routing/RouteManeuverBuilder.swift", "AirportXRCompanion/Localization/ManualLocalizationService.swift", "AirportXRCompanion/Views/ARGuide/ARGuideView.swift", "Scripts/indoor-signal-emulator.py", "Scripts/run-simulator.sh", "AirportXRCompanionTests/LongHaulExpansionTests.swift"]
+    },
+    {
+      "id": "verify-disk",
+      "priority": "P1",
+      "kind": "Build precondition",
+      "status": "failed",
+      "command": "df -Pk .",
+      "result": "Project-owned DerivedData was removed. About 1.5 GiB is available, still below the required 5 GiB rebuild floor.",
+      "observed_at": "2026-07-16T22:25:00Z",
+      "evidence": ["Observed /System/Volumes/Data filesystem output", "Removed build/DerivedData and the AirportXRCompanion-named global DerivedData directory only"]
+    },
+    {
+      "id": "verify-figma",
+      "priority": "P1",
+      "kind": "Figma validation",
+      "status": "inconclusive",
+      "command": "Figma MCP create/use/inspect workflow",
+      "result": "Foundations file and node 3:31 were created, but quota blocked structural validation and all seven product frames.",
+      "observed_at": "2026-07-14T10:36:37Z",
+      "evidence": ["Documentation/UIUXReview.md:395", "https://www.figma.com/design/MgNQlseRuiBCZvDjXnsvHi?node-id=3-31"]
+    },
+    {
+      "id": "verify-report",
+      "priority": "P1",
+      "kind": "Report export",
+      "status": "passed",
+      "command": "python3 Scripts/reporting/export_report_pdf.py Documentation/Reports/2026-07-14-airportxr-long-haul-layover.md --output-root output/pdf --report-id 2026-07-14-airportxr-long-haul-layover --render-check require",
+      "result": "The deterministic 47-page PDF rendered successfully. All four contact sheets and affected pages 8, 40, and 41 were visually inspected without clipping. SHA-256: Markdown 0f6844811901596920e690686f17551b2970a4293fca5e6a7384c4a9ad401f23; PDF 63a776044baa97ae1d212944c2774c48db44b7869f5c8da1cd3b80a2e4358d25.",
+      "observed_at": "2026-07-16T22:18:00Z",
+      "evidence": ["output/pdf/2026-07-14-airportxr-long-haul-layover/2026-07-14-airportxr-long-haul-layover.md", "output/pdf/2026-07-14-airportxr-long-haul-layover/2026-07-14-airportxr-long-haul-layover.pdf", "output/pdf/2026-07-14-airportxr-long-haul-layover/2026-07-14-airportxr-long-haul-layover.provenance.json", "output/pdf/2026-07-14-airportxr-long-haul-layover/rendered/"]
+    }
+  ],
+  "risks": [
+    {
+      "id": "risk-learning-contradiction",
+      "priority": "P0",
+      "statement": "Current code/tests enforce user-outcomes-only learning and contradict the latest accepted provider-policy-gated live-learning decision.",
+      "status": "satisfied",
+      "evidence": ["AirportXRCompanion/Models/LongHaul/ProviderModels.swift:20", "AirportXRCompanion/Aviation/Repositories/FlightRepository.swift:100", "AirportXRCompanion/Services/OnDevicePredictionService.swift:89", "/tmp/AirportXRLearningDerivedData/Logs/Test/Test-AirportXRCompanion-2026.07.14_06-42-58--0400.xcresult: 15 targeted tests passed, 0 failed"]
+    },
+    {
+      "id": "risk-unverified-current-tree",
+      "priority": "P0",
+      "statement": "The generated project and passing build predate important source/test files, so compile and behavioral status of the current implementation is unknown.",
+      "status": "superseded",
+      "evidence": ["AirportXRCompanion.xcodeproj/project.pbxproj includes LongHaulExpansionTests, MetroAirportDatabase, and ProxyLayoverProviders as observed 2026-07-14T10:44:51Z", "/tmp/AirportXRLearningDerivedData/Logs/Test/Test-AirportXRCompanion-2026.07.14_06-42-58--0400.xcresult"]
+    },
+    {
+      "id": "risk-full-verification-open",
+      "priority": "P0",
+      "statement": "Earlier full local verification gaps were closed by the synchronized build, unit, UI, Worker, dry-run, and simulator acceptance snapshot.",
+      "status": "satisfied",
+      "evidence": ["build/final-clean-build.log", "build/final-clean-unit-tests.log", "build/final-full-ui-tests.log", "build/final-backend-tests.log", "build/final-wrangler-dry-run.log", "build/final-normal-simulator.log"]
+    },
+    {
+      "id": "risk-demo-fastest",
+      "priority": "P0",
+      "statement": "The transfer planner can select demo routes and TransitView can label that selection ‘Fastest’, violating the complete-current-evidence rule.",
+      "status": "satisfied",
+      "evidence": ["build/final-full-ui-tests.log", "Documentation/Screenshots/2026-07-14-final-acceptance/demo-interairport.png"]
+    },
+    {
+      "id": "risk-ui-interaction",
+      "priority": "P0",
+      "statement": "Transit plan cards contain a NavigationLink inside a Button, and HND-NRT lacks a prominent start-transfer action and derived onward-airport target.",
+      "status": "satisfied",
+      "evidence": ["build/final-full-ui-tests.log", "Documentation/Screenshots/2026-07-14-final-acceptance/demo-interairport.png"]
+    },
+    {
+      "id": "risk-hnd-wireframe-zone",
+      "priority": "P1",
+      "statement": "The UI/UX wireframe text calls the Terminal 3 work pod airside, while the corrected official registry records it as airport landside; the final Figma/report must use the official zone.",
+      "status": "satisfied",
+      "evidence": ["AirportXRCompanion/Services/LongHaul/LongHaulReferenceScenario.swift:365", "build/final-full-ui-tests.log", "https://tokyo-haneda.com/en/service/facilities/work_box.html"]
+    },
+    {
+      "id": "risk-backend-hardening",
+      "priority": "P1",
+      "statement": "The Worker lacks production client authentication/App Attest and managed rate limiting, and safeExternalURL currently accepts HTTP as well as HTTPS.",
+      "status": "active",
+      "evidence": ["Backend/README.md", "Backend/src/index.js:818"]
+    },
+    {
+      "id": "risk-live-unverified",
+      "priority": "P1",
+      "statement": "No credential-gated live contract result proves current flight, hotel, activity, entry, transit, weather, or transfer data; normal live mode can fall back to the named demo itinerary.",
+      "status": "active",
+      "evidence": ["AirportXRCompanion/ViewModels/LongHaulExperienceViewModel.swift:114", "AirportXRCompanion/App/AppContainer.swift:37"]
+    },
+    {
+      "id": "risk-doc-drift",
+      "priority": "P1",
+      "statement": "Canonical report, user guide, and developer guide were synchronized to the final local acceptance snapshot; secondary architecture documents may still describe narrower component boundaries.",
+      "status": "satisfied",
+      "evidence": ["Documentation/Reports/2026-07-14-airportxr-long-haul-layover.md", "Documentation/UserDemoGuide.md", "Documentation/DeveloperGuide.md"]
+    },
+    {
+      "id": "risk-figma-quota",
+      "priority": "P1",
+      "statement": "The Starter-plan MCP quota blocks creation and validation of the seven requested Figma product screens; only foundations are available.",
+      "status": "blocked",
+      "evidence": ["Documentation/UIUXReview.md:395"]
+    },
+    {
+      "id": "risk-no-baseline-commit",
+      "priority": "P2",
+      "statement": "The Git repository has no commits and all project files are untracked, making change attribution and rollback fragile.",
+      "status": "active",
+      "evidence": ["git status observed 2026-07-14T10:36:37Z: No commits yet on main"]
+    }
+  ],
+  "open_work": [
+    {
+      "id": "task-live-learning",
+      "priority": "P0",
+      "task": "Implement and test policy-gated live-data learning without authorizing prohibited provider fields or weakening safety.",
+      "status": "done",
+      "blocked_by": [],
+      "definition_of_done": "Exact provider/field training policy and provenance are enforced; permitted live observations train; prohibited/demo/stale/duplicate observations do not; disable, erase, persistence, calibration, and safety isolation tests pass.",
+      "evidence": ["AirportXRCompanion/Models/LongHaul/ProviderModels.swift:20", "AirportXRCompanion/Aviation/Repositories/FlightRepository.swift:100", "AirportXRCompanion/Services/OnDevicePredictionService.swift:89", "/tmp/AirportXRLearningDerivedData/Logs/Test/Test-AirportXRCompanion-2026.07.14_06-42-58--0400.xcresult: 15 passed, 0 failed"]
+    },
+    {
+      "id": "task-regenerate-build",
+      "priority": "P0",
+      "task": "Recheck disk and run the standalone full build of the regenerated current iOS tree.",
+      "status": "done",
+      "blocked_by": [],
+      "definition_of_done": "AirportXRCompanion.xcodeproj includes all current source/test files and a fresh terminal build log ends BUILD SUCCEEDED.",
+      "evidence": ["build/current-build.log: BUILD SUCCEEDED at 2026-07-14T10:45:02Z"]
+    },
+    {
+      "id": "task-run-tests",
+      "priority": "P0",
+      "task": "Update and run all principal UI/accessibility flows and the complete unit suite.",
+      "status": "done",
+      "blocked_by": [],
+      "definition_of_done": "A fresh UI-test xcresult reports all maintained UI flows passing with zero failures, including six tabs, HND-NRT transfer-first behavior, data badges, accessibility, and offline mode.",
+      "evidence": ["build/final-clean-unit-tests.log: 78 unit tests passed, 0 failed", "build/final-full-ui-tests.log: 13 UI tests passed, 0 failed"]
+    },
+    {
+      "id": "task-fix-ux-p0",
+      "priority": "P0",
+      "task": "Apply safety-critical UI audit fixes and reconcile HND official access-zone copy.",
+      "status": "done",
+      "blocked_by": [],
+      "definition_of_done": "No nested controls; transfer CTA and target lead HND-NRT; no demo-fastest claim; official HND work pod is landside; accessibility-size layouts and VoiceOver order are tested.",
+      "evidence": ["build/final-full-ui-tests.log", "Documentation/Screenshots/2026-07-14-final-acceptance/demo-interairport.png"]
+    },
+    {
+      "id": "task-backend-tests-docs",
+      "priority": "P1",
+      "task": "Harden and test the Worker and update endpoint/secret/provider documentation.",
+      "status": "done",
+      "blocked_by": [],
+      "definition_of_done": "Backend automated tests cover auth/quota/429/malformed/fallback, external links require HTTPS, policy responses match client learning rules, and docs list only variable names and safe setup locations.",
+      "evidence": ["build/final-backend-check.log", "build/final-backend-tests.log", "build/final-wrangler-dry-run.log"]
+    },
+    {
+      "id": "task-simulator",
+      "priority": "P0",
+      "task": "Launch and inspect the normal iPhone UI in live-requested, demo, offline, stochastic/replay, and HND-NRT scenarios.",
+      "status": "done",
+      "blocked_by": [],
+      "definition_of_done": "Screenshots and logs prove correct data badges, six-tab flows, transfer-first behavior, no clipping, and ordinary launches omit --uitesting.",
+      "evidence": ["build/final-normal-simulator.log", "Documentation/Screenshots/2026-07-14-final-acceptance/"]
+    },
+    {
+      "id": "task-report",
+      "priority": "P1",
+      "task": "Write, export, hash, render, and visually inspect the final branded report trio.",
+      "status": "done",
+      "blocked_by": [],
+      "definition_of_done": "Canonical Markdown and deterministic output Markdown/PDF/provenance exist at required paths, every page is inspected, hashes reproduce, and all live/demo/limitation/design-rationale claims match evidence.",
+      "evidence": ["output/pdf/2026-07-14-airportxr-long-haul-layover/2026-07-14-airportxr-long-haul-layover.md", "output/pdf/2026-07-14-airportxr-long-haul-layover/2026-07-14-airportxr-long-haul-layover.pdf", "output/pdf/2026-07-14-airportxr-long-haul-layover/provenance.json", "output/pdf/2026-07-14-airportxr-long-haul-layover/rendered/"]
+    },
+    {
+      "id": "task-figma-screens",
+      "priority": "P2",
+      "task": "Complete seven annotated Figma product frames after quota reset or plan upgrade.",
+      "status": "blocked",
+      "blocked_by": ["risk-figma-quota"],
+      "definition_of_done": "All seven phone frames, rationales, accessibility annotations, metadata checks, screenshots, and clipping/target audits exist in the linked Figma file."
+    },
+    {
+      "id": "task-live-contracts",
+      "priority": "P2",
+      "task": "Run opt-in live provider contract tests when authorized credentials are available.",
+      "status": "blocked",
+      "blocked_by": ["External credentials and provider access"],
+      "definition_of_done": "Private-payload-safe results prove configured live adapters and are explicitly non-gating for CI."
+    },
+    {
+      "id": "task-physical-ar",
+      "priority": "P2",
+      "task": "Validate physical-device AR separately from simulator acceptance.",
+      "status": "blocked",
+      "blocked_by": ["Physical iPhone and signing/device access"],
+      "definition_of_done": "Device-only AR tracking, permissions, recovery, and map fallback results are recorded separately without overstating simulator coverage."
+    }
+  ],
+  "handoff": {
+    "resume_from": "Restore at least 5 GiB free disk, then build and test the richer RouteManeuverBuilder, HNDCoreLocationQAFixture, and explicit Core Location QA launch. Run the independent emulator with --transport core-location, launch ar-corelocation, and visually verify slight/standard/sharp/U-turn arrows plus compass wording before rerunning the full suites. Earlier backend evidence and the previous 88-unit-test result remain valid only for their recorded source revision; real venue positioning, external credentials/accounts, two-device reminders, physical-device AR, and renewed Figma quota remain separate.",
+    "next_actions": [
+      {
+        "task": "After disk space is restored, rebuild, run the new maneuver/Core Location unit cases, launch ar-corelocation beside the independent driver, and rerun focused AR/walkthrough UI tests before the full UI suite.",
+        "definition_of_done": "Current source builds; Apple Simulator delivers route movement through CLLocationManager; left/right/slight/sharp/U-turn and compass instructions visibly update; ordinary launch remains free of QA movement; screenshots show no clipping; full unit/UI suites are green."
+      },
+      {
+        "task": "Run credential/account/hardware acceptance when external access is available.",
+        "definition_of_done": "Live provider contracts, two-device reminders, protected Worker authentication, and physical-device AR have separate evidence."
+      }
+    ]
+  }
+}

@@ -1,0 +1,269 @@
+{"kind":"deck","id":"pr/asccno","name":"Deck"}
+{"kind":"layout","layoutId":"/ppt/slideMasters/slideMaster1.xml","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout1.xml","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/y90nupkv","slide":1,"title":"AirBorder","textShapes":7}
+{"kind":"textbox","id":"sh/wn6dc7eh","slide":1,"text":"AirBorder","textPreview":"AirBorder","textChars":9,"textLines":1,"bbox":[72,58,360,60]}
+{"kind":"textbox","id":"sh/547294r6","slide":1,"text":"Long-haul layover companion","textPreview":"Long-haul layover companion","textChars":27,"textLines":1,"bbox":[72,175,850,156]}
+{"kind":"textbox","id":"sh/k3yl0zql","slide":1,"text":"A passenger-centered mobile assistant for complex international transits, airport changes, baggage handling, and time-sensitive city or airport plans.","textPreview":"A passenger-centered mobile assistant for complex international transits, airport changes, baggage handling, and time-sensitive city or a...","textChars":150,"textLines":1,"bbox":[76,365,800,92]}
+{"kind":"shape","id":"sh/7qp4be9c","slide":1,"bbox":[914,78,270,520]}
+{"kind":"textbox","id":"sh/65g3298r","slide":1,"text":"BKK → HND\n→ LAX","textPreview":"BKK → HND | → LAX","textChars":15,"textLines":2,"bbox":[950,138,210,76]}
+{"kind":"textbox","id":"sh/ts7md4r2","slide":1,"text":"Reference journey","textPreview":"Reference journey","textChars":17,"textLines":1,"bbox":[950,225,210,34]}
+{"kind":"textbox","id":"sh/sryl4zqx","slide":1,"text":"Gate\nWeather\nBags\nEntry\nMap\nReturn","textPreview":"Gate | Weather | Bags | Entry | Map | Return","textChars":34,"textLines":6,"bbox":[950,278,210,230]}
+{"kind":"shape","id":"sh/fu94fe98","slide":1,"bbox":[72,620,1136,3]}
+{"kind":"textbox","id":"sh/utg3698n","slide":1,"text":"Project presentation · July 2026","textPreview":"Project presentation · July 2026","textChars":32,"textLines":1,"bbox":[72,638,420,24]}
+{"kind":"notes","id":"nt/y90nupkv","slide":1,"text":""}
+{"kind":"slide","id":"sl/hwbqtkby","slide":2,"title":"AIRBORDER","textShapes":9}
+{"kind":"textbox","id":"sh/bip8jmho","slide":2,"text":"AIRBORDER","textPreview":"AIRBORDER","textChars":9,"textLines":1,"bbox":[72,42,280,24]}
+{"kind":"textbox","id":"sh/9072xkry","slide":2,"text":"Long-haul transfers create too many moving parts for one screen","textPreview":"Long-haul transfers create too many moving parts for one screen","textChars":63,"textLines":1,"bbox":[72,76,980,52]}
+{"kind":"shape","id":"sh/ozy1ofad","slide":2,"bbox":[72,142,1136,3]}
+{"kind":"textbox","id":"sh/b29kza94","slide":2,"text":"AirBorder’s design goal is to turn scattered travel information into one simple sequence: understand the connection, choose what is feasible, and always know how to get back to the gate.","textPreview":"AirBorder’s design goal is to turn scattered travel information into one simple sequence: understand the connection, choose what is feasi...","textChars":186,"textLines":1,"bbox":[72,172,820,86]}
+{"kind":"shape","id":"sh/a10jqpsj","slide":2,"bbox":[72,300,350,210]}
+{"kind":"shape","id":"sh/x4r21kru","slide":2,"bbox":[72,300,7,210]}
+{"kind":"textbox","id":"sh/w3i1sfa9","slide":2,"text":"What passengers ask","textPreview":"What passengers ask","textChars":19,"textLines":1,"bbox":[96,318,308,30]}
+{"kind":"textbox","id":"sh/r65knqtk","slide":2,"text":"Do I have enough time? Are my bags transferred? Can I leave the airport? Where can I rest, work, eat, or buy something?","textPreview":"Do I have enough time? Are my bags transferred? Can I leave the airport? Where can I rest, work, eat, or buy something?","textChars":119,"textLines":1,"bbox":[96,356,308,138]}
+{"kind":"shape","id":"sh/q5wjelsz","slide":2,"bbox":[465,300,350,210]}
+{"kind":"shape","id":"sh/ove9o7yd","slide":2,"bbox":[465,300,7,210]}
+{"kind":"textbox","id":"sh/9wnqhczy","slide":2,"text":"What changes live","textPreview":"What changes live","textChars":17,"textLines":1,"bbox":[489,318,308,30]}
+{"kind":"textbox","id":"sh/mtwrmxg7","slide":2,"text":"Gate, delay outlook, boarding time, weather, ground transport, facility hours, and the passenger’s current location.","textPreview":"Gate, delay outlook, boarding time, weather, ground transport, facility hours, and the passenger’s current location.","textChars":116,"textLines":1,"bbox":[489,356,308,138]}
+{"kind":"shape","id":"sh/nu58f2hs","slide":2,"bbox":[858,300,350,210]}
+{"kind":"shape","id":"sh/wjy9sry9","slide":2,"bbox":[858,300,7,210]}
+{"kind":"textbox","id":"sh/xk7qlczu","slide":2,"text":"What the UI must do","textPreview":"What the UI must do","textChars":19,"textLines":1,"bbox":[882,318,308,30]}
+{"kind":"textbox","id":"sh/ahwrqhgj","slide":2,"text":"Use short passenger-facing language, keep essential timing visible, and avoid exposing backend calculations unless the user opens supporting details.","textPreview":"Use short passenger-facing language, keep essential timing visible, and avoid exposing backend calculations unless the user opens support...","textChars":149,"textLines":1,"bbox":[882,356,308,138]}
+{"kind":"notes","id":"nt/hwbqtkby","slide":2,"text":""}
+{"kind":"slide","id":"sl/ofy9wn61","slide":3,"title":"AIRBORDER","textShapes":9}
+{"kind":"textbox","id":"sh/x8nml0ra","slide":3,"text":"AIRBORDER","textPreview":"AIRBORDER","textChars":9,"textLines":1,"bbox":[72,42,280,24]}
+{"kind":"textbox","id":"sh/cza94vmx","slide":3,"text":"Persona: an international traveler with a high-friction layover","textPreview":"Persona: an international traveler with a high-friction layover","textChars":63,"textLines":1,"bbox":[72,76,980,52]}
+{"kind":"shape","id":"sh/d0jax03i","slide":3,"bbox":[72,142,1136,3]}
+{"kind":"shape","id":"sh/298ryl4v","slide":3,"bbox":[72,180,330,390]}
+{"kind":"textbox","id":"sh/3ah8rqlg","slide":3,"text":"Alex Chen","textPreview":"Alex Chen","textChars":9,"textLines":1,"bbox":[108,215,260,54]}
+{"kind":"textbox","id":"sh/obq90bml","slide":3,"text":"38-year-old Singaporean business traveler\nBangkok → Tokyo → Los Angeles\nTime-sensitive, budget-aware, carrying checked baggage","textPreview":"38-year-old Singaporean business traveler | Bangkok → Tokyo → Los Angeles | Time-sensitive, budget-aware, carrying checked baggage","textChars":126,"textLines":3,"bbox":[108,286,250,145]}
+{"kind":"textbox","id":"sh/pcjqtg36","slide":3,"text":"Success means she reaches boarding calmly, not just that she sees a list of places.","textPreview":"Success means she reaches boarding calmly, not just that she sees a list of places.","textChars":83,"textLines":1,"bbox":[108,470,240,70]}
+{"kind":"shape","id":"sh/m5cra54z","slide":3,"bbox":[470,203,12,12]}
+{"kind":"textbox","id":"sh/n6ls3alk","slide":3,"text":"Needs to know whether she must reclaim and recheck bags.","textPreview":"Needs to know whether she must reclaim and recheck bags.","textChars":56,"textLines":1,"bbox":[498,194,652,78]}
+{"kind":"shape","id":"sh/n2l4fq98","slide":3,"bbox":[470,285,12,12]}
+{"kind":"textbox","id":"sh/m1c3mlsn","slide":3,"text":"Wants a work pod, shower, affordable food, or a short city visit if time allows.","textPreview":"Wants a work pod, shower, affordable food, or a short city visit if time allows.","textChars":80,"textLines":1,"bbox":[498,276,652,78]}
+{"kind":"shape","id":"sh/943mhgre","slide":3,"bbox":[470,367,12,12]}
+{"kind":"textbox","id":"sh/83ulovat","slide":3,"text":"Prefers clear route steps over technical confidence labels.","textPreview":"Prefers clear route steps over technical confidence labels.","textChars":59,"textLines":1,"bbox":[498,358,652,78]}
+{"kind":"shape","id":"sh/v6l4jq94","slide":3,"bbox":[470,449,12,12]}
+{"kind":"textbox","id":"sh/a5c3ql8z","slide":3,"text":"Needs entry and transit information in plain language, with links kept inside the app.","textPreview":"Needs entry and transit information in plain language, with links kept inside the app.","textChars":86,"textLines":1,"bbox":[498,440,652,78]}
+{"kind":"notes","id":"nt/ofy9wn61","slide":3,"text":""}
+{"kind":"slide","id":"sl/jyx0ra1s","slide":4,"title":"AIRBORDER","textShapes":13}
+{"kind":"textbox","id":"sh/ilwf69kv","slide":4,"text":"AIRBORDER","textPreview":"AIRBORDER","textChars":9,"textLines":1,"bbox":[72,42,280,24]}
+{"kind":"textbox","id":"sh/1cj2d8b6","slide":4,"text":"Scenario: BKK–HND–LAX, with HND as the fully populated airport","textPreview":"Scenario: BKK–HND–LAX, with HND as the fully populated airport","textChars":62,"textLines":1,"bbox":[72,76,980,52]}
+{"kind":"shape","id":"sh/0ba143al","slide":4,"bbox":[72,142,1136,3]}
+{"kind":"shape","id":"sh/rm1k7yt4","slide":4,"bbox":[78,210,190,104]}
+{"kind":"textbox","id":"sh/ql8jytsj","slide":4,"text":"Depart\nBKK","textPreview":"Depart | BKK","textChars":10,"textLines":2,"bbox":[94,228,158,76]}
+{"kind":"shape","id":"sh/doj29oba","slide":4,"bbox":[282,262,10,0]}
+{"kind":"shape","id":"sh/sna103ap","slide":4,"bbox":[306,210,190,104]}
+{"kind":"textbox","id":"sh/3ihk3et8","slide":4,"text":"Arrive\nHND","textPreview":"Arrive | HND","textChars":10,"textLines":2,"bbox":[322,228,158,76]}
+{"kind":"shape","id":"sh/ih8ju9sn","slide":4,"bbox":[510,262,10,0]}
+{"kind":"shape","id":"sh/kbm987y5","slide":4,"bbox":[534,210,190,104]}
+{"kind":"textbox","id":"sh/5cva1cfq","slide":4,"text":"Layover\nTokyo Haneda","textPreview":"Layover | Tokyo Haneda","textChars":20,"textLines":2,"bbox":[550,228,158,76]}
+{"kind":"shape","id":"sh/i94r6xgz","slide":4,"bbox":[738,262,10,0]}
+{"kind":"shape","id":"sh/jadsz2xk","slide":4,"bbox":[762,210,190,104]}
+{"kind":"textbox","id":"sh/w72947yt","slide":4,"text":"Board\nHND","textPreview":"Board | HND","textChars":9,"textLines":2,"bbox":[778,228,158,76]}
+{"kind":"shape","id":"sh/x8vaxsfe","slide":4,"bbox":[966,262,10,0]}
+{"kind":"shape","id":"sh/a5kr2xg3","slide":4,"bbox":[990,210,190,104]}
+{"kind":"textbox","id":"sh/v6tsv2xo","slide":4,"text":"Arrive\nLAX","textPreview":"Arrive | LAX","textChars":10,"textLines":2,"bbox":[1006,228,158,76]}
+{"kind":"shape","id":"sh/g36tgryd","slide":4,"bbox":[80,390,340,166]}
+{"kind":"shape","id":"sh/h4fa9wfy","slide":4,"bbox":[80,390,7,166]}
+{"kind":"textbox","id":"sh/p0batw72","slide":4,"text":"Core question","textPreview":"Core question","textChars":13,"textLines":1,"bbox":[104,408,298,30]}
+{"kind":"textbox","id":"sh/oz29krqh","slide":4,"text":"Can the passenger safely use the layover for rest, work, food, shopping, a hotel, or a city visit?","textPreview":"Can the passenger safely use the layover for rest, work, food, shopping, a hotel, or a city visit?","textChars":98,"textLines":1,"bbox":[104,446,298,94]}
+{"kind":"shape","id":"sh/3ytsrmpw","slide":4,"bbox":[470,390,340,166]}
+{"kind":"shape","id":"sh/2xkrih8b","slide":4,"bbox":[470,390,7,166]}
+{"kind":"textbox","id":"sh/1wbapc7q","slide":4,"text":"Additional scenario","textPreview":"Additional scenario","textChars":19,"textLines":1,"bbox":[494,408,298,30]}
+{"kind":"textbox","id":"sh/gv29g7q5","slide":4,"text":"If flights split across airports, AirBorder handles HND → NRT as a mandatory surface transfer before any optional stop.","textPreview":"If flights split across airports, AirBorder handles HND → NRT as a mandatory surface transfer before any optional stop.","textChars":119,"textLines":1,"bbox":[494,446,298,94]}
+{"kind":"shape","id":"sh/fu9sn2p0","slide":4,"bbox":[860,390,340,166]}
+{"kind":"shape","id":"sh/et0reh8f","slide":4,"bbox":[860,390,7,166]}
+{"kind":"textbox","id":"sh/tsrqlc7u","slide":4,"text":"Passenger outcome","textPreview":"Passenger outcome","textChars":17,"textLines":1,"bbox":[884,408,298,30]}
+{"kind":"textbox","id":"sh/sri9s7q9","slide":4,"text":"The app shows the next action first, then the best options ranked by time, cost, access, fatigue, weather, and route complexity.","textPreview":"The app shows the next action first, then the best options ranked by time, cost, access, fatigue, weather, and route complexity.","textChars":128,"textLines":1,"bbox":[884,446,298,94]}
+{"kind":"notes","id":"nt/jyx0ra1s","slide":4,"text":""}
+{"kind":"slide","id":"sl/i107q5of","slide":5,"title":"AIRBORDER","textShapes":17}
+{"kind":"textbox","id":"sh/pkr6tgjy","slide":5,"text":"AIRBORDER","textPreview":"AIRBORDER","textChars":9,"textLines":1,"bbox":[72,42,280,24]}
+{"kind":"textbox","id":"sh/dgbulwnm","slide":5,"text":"Storyboard: from ticket scan to boarding","textPreview":"Storyboard: from ticket scan to boarding","textChars":40,"textLines":1,"bbox":[72,76,980,52]}
+{"kind":"shape","id":"sh/cf2tcr61","slide":5,"bbox":[72,142,1136,3]}
+{"kind":"shape","id":"sh/z2tcnm5s","slide":5,"bbox":[72,188,196,346]}
+{"kind":"textbox","id":"sh/yhkbe1o7","slide":5,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[90,210,55,52]}
+{"kind":"textbox","id":"sh/l4bupwny","slide":5,"text":"Import ticket","textPreview":"Import ticket","textChars":13,"textLines":1,"bbox":[90,280,156,58]}
+{"kind":"textbox","id":"sh/032tgr6d","slide":5,"text":"Scan a PDF or add flights manually. The app reads route, dates, airports, and airline context.","textPreview":"Scan a PDF or add flights manually. The app reads route, dates, airports, and airline context.","textChars":94,"textLines":1,"bbox":[90,355,156,130]}
+{"kind":"shape","id":"sh/n6dcr65o","slide":5,"bbox":[300,188,196,346]}
+{"kind":"textbox","id":"sh/m5kbi1oj","slide":5,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[318,210,55,52]}
+{"kind":"textbox","id":"sh/w32dkbuh","slide":5,"text":"Before landing","textPreview":"Before landing","textChars":14,"textLines":1,"bbox":[318,280,156,58]}
+{"kind":"textbox","id":"sh/x4vedgvm","slide":5,"text":"Flight progress, weather, and delay outlook update while offline details stay usable.","textPreview":"Flight progress, weather, and delay outlook update while offline details stay usable.","textChars":85,"textLines":1,"bbox":[318,355,156,130]}
+{"kind":"shape","id":"sh/ahkvi1cb","slide":5,"bbox":[528,188,196,346]}
+{"kind":"textbox","id":"sh/v2twb6dw","slide":5,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[546,210,55,52]}
+{"kind":"textbox","id":"sh/k7mxovud","slide":5,"text":"At the airport","textPreview":"At the airport","textChars":14,"textLines":1,"bbox":[546,280,156,58]}
+{"kind":"textbox","id":"sh/58vehgvy","slide":5,"text":"The journey screen shows the active layover, gate, return plan, and urgent changes.","textPreview":"The journey screen shows the active layover, gate, return plan, and urgent changes.","textChars":83,"textLines":1,"bbox":[546,355,156,130]}
+{"kind":"shape","id":"sh/i54fmlc7","slide":5,"bbox":[756,188,196,346]}
+{"kind":"textbox","id":"sh/j6dwfqds","slide":5,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[774,210,55,52]}
+{"kind":"textbox","id":"sh/sb6xsvu9","slide":5,"text":"Choose a plan","textPreview":"Choose a plan","textChars":13,"textLines":1,"bbox":[774,280,156,58]}
+{"kind":"textbox","id":"sh/tcfel0vu","slide":5,"text":"Compare rest, work, food, shops, airport facilities, nearby hotels, or city options.","textPreview":"Compare rest, work, food, shops, airport facilities, nearby hotels, or city options.","textChars":84,"textLines":1,"bbox":[774,355,156,130]}
+{"kind":"shape","id":"sh/hgrmpwj2","slide":5,"bbox":[984,188,196,346]}
+{"kind":"textbox","id":"sh/gfi5grih","slide":5,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[1002,210,55,52]}
+{"kind":"textbox","id":"sh/fe94nm1w","slide":5,"text":"Get back on time","textPreview":"Get back on time","textChars":16,"textLines":1,"bbox":[1002,280,156,58]}
+{"kind":"textbox","id":"sh/ud0ne10b","slide":5,"text":"Map and AR guidance lead to the selected venue or directly back to the departure gate.","textPreview":"Map and AR guidance lead to the selected venue or directly back to the departure gate.","textChars":86,"textLines":1,"bbox":[1002,355,156,130]}
+{"kind":"notes","id":"nt/i107q5of","slide":5,"text":""}
+{"kind":"slide","id":"sl/x8f69ofe","slide":6,"title":"AIRBORDER","textShapes":8}
+{"kind":"textbox","id":"sh/cbe5g3ih","slide":6,"text":"AIRBORDER","textPreview":"AIRBORDER","textChars":9,"textLines":1,"bbox":[72,42,280,24]}
+{"kind":"textbox","id":"sh/yhg7epsj","slide":6,"text":"User flow: one itinerary, many grounded choices","textPreview":"User flow: one itinerary, many grounded choices","textChars":47,"textLines":1,"bbox":[72,76,980,52]}
+{"kind":"shape","id":"sh/zi98nu94","slide":6,"bbox":[72,142,1136,3]}
+{"kind":"shape","id":"sh/87ipkzal","slide":6,"bbox":[82,188,190,102]}
+{"kind":"textbox","id":"sh/98rqt4r6","slide":6,"text":"Add trip\nor scan ticket","textPreview":"Add trip | or scan ticket","textChars":23,"textLines":2,"bbox":[98,206,158,74]}
+{"kind":"shape","id":"sh/ml07i9sv","slide":6,"bbox":[286,239,10,0]}
+{"kind":"shape","id":"sh/7m98ru9g","slide":6,"bbox":[310,188,190,102]}
+{"kind":"textbox","id":"sh/oryp8fah","slide":6,"text":"Complete\ntraveler profile","textPreview":"Complete | traveler profile","textChars":25,"textLines":2,"bbox":[326,206,158,74]}
+{"kind":"shape","id":"sh/pc76hkr2","slide":6,"bbox":[514,239,10,0]}
+{"kind":"shape","id":"sh/h4bupgn6","slide":6,"bbox":[538,188,190,102]}
+{"kind":"textbox","id":"sh/w32twb6l","slide":6,"text":"Build\nlayover context","textPreview":"Build | layover context","textChars":21,"textLines":2,"bbox":[554,206,158,74]}
+{"kind":"shape","id":"sh/v2tcn650","slide":6,"bbox":[742,239,10,0]}
+{"kind":"shape","id":"sh/u1kbu1ov","slide":6,"bbox":[766,188,190,102]}
+{"kind":"textbox","id":"sh/5svutgni","slide":6,"text":"Pick\nvenue or city plan","textPreview":"Pick | venue or city plan","textChars":23,"textLines":2,"bbox":[782,206,158,74]}
+{"kind":"shape","id":"sh/47mt0b6x","slide":6,"bbox":[970,239,10,0]}
+{"kind":"shape","id":"sh/j6dcr65c","slide":6,"bbox":[994,188,190,102]}
+{"kind":"textbox","id":"sh/i54bylor","slide":6,"text":"Navigate\nand receive alerts","textPreview":"Navigate | and receive alerts","textChars":27,"textLines":2,"bbox":[1010,206,158,74]}
+{"kind":"shape","id":"sh/twfux0ne","slide":6,"bbox":[116,372,1048,176]}
+{"kind":"textbox","id":"sh/svmt4v6t","slide":6,"text":"The flow stays passenger-facing: “You may need to recheck bags,” “Show route,” “Refresh weather,” and “Return to gate” replace developer language such as thresholds, provenance internals, and route penalty names.","textPreview":"The flow stays passenger-facing: “You may need to recheck bags,” “Show route,” “Refresh weather,” and “Return to gate” replace developer ...","textChars":212,"textLines":1,"bbox":[152,418,976,78]}
+{"kind":"notes","id":"nt/x8f69ofe","slide":6,"text":""}
+{"kind":"slide","id":"sl/gnmp4jqx","slide":7,"title":"AIRBORDER","textShapes":5}
+{"kind":"textbox","id":"sh/xcz2l03q","slide":7,"text":"AIRBORDER","textPreview":"AIRBORDER","textChars":9,"textLines":1,"bbox":[72,42,280,24]}
+{"kind":"textbox","id":"sh/cb2tkvap","slide":7,"text":"Implemented interface: the journey starts with the safest action","textPreview":"Implemented interface: the journey starts with the safest action","textChars":64,"textLines":1,"bbox":[72,76,980,52]}
+{"kind":"shape","id":"sh/dcbud0ra","slide":7,"bbox":[72,142,1136,3]}
+{"kind":"shape","id":"sh/ydkbm5sv","slide":7,"bbox":[70,168,340,495]}
+{"kind":"shape","id":"sh/kzmdova1","slide":7,"bbox":[475,214,12,12]}
+{"kind":"textbox","id":"sh/l0vuh0rm","slide":7,"text":"A day-of-travel summary shows route, airport, gate, layover, weather, and return status.","textPreview":"A day-of-travel summary shows route, airport, gate, layover, weather, and return status.","textChars":88,"textLines":1,"bbox":[503,205,637,88]}
+{"kind":"shape","id":"sh/eh0ba1sr","slide":7,"bbox":[475,306,12,12]}
+{"kind":"textbox","id":"sh/fi9c369c","slide":7,"text":"The “Return to gate” action is always available because getting back to boarding is the dominant travel goal.","textPreview":"The “Return to gate” action is always available because getting back to boarding is the dominant travel goal.","textChars":109,"textLines":1,"bbox":[503,297,637,88]}
+{"kind":"shape","id":"sh/baxkjqlk","slide":7,"bbox":[475,398,12,12]}
+{"kind":"textbox","id":"sh/a9ojq5kz","slide":7,"text":"Bottom navigation mirrors familiar airline-app patterns: trip, flights, guide/map, and more options.","textPreview":"Bottom navigation mirrors familiar airline-app patterns: trip, flights, guide/map, and more options.","textChars":100,"textLines":1,"bbox":[503,389,637,88]}
+{"kind":"image","id":"im/byxwryh8","slide":7,"name":"","geometry":"roundRect","bbox":[130.76,178,218.48,475]}
+{"kind":"notes","id":"nt/gnmp4jqx","slide":7,"text":""}
+{"kind":"slide","id":"sl/fu1gfa1s","slide":8,"title":"AIRBORDER","textShapes":8}
+{"kind":"textbox","id":"sh/kfixwbe1","slide":8,"text":"AIRBORDER","textPreview":"AIRBORDER","textChars":9,"textLines":1,"bbox":[72,42,280,24]}
+{"kind":"textbox","id":"sh/18byd4zy","slide":8,"text":"Demo mode walks through the system without manual setup","textPreview":"Demo mode walks through the system without manual setup","textChars":55,"textLines":1,"bbox":[72,76,980,52]}
+{"kind":"shape","id":"sh/g72x4zyd","slide":8,"bbox":[72,142,1136,3]}
+{"kind":"shape","id":"sh/ri9g7uhw","slide":8,"bbox":[68,166,350,504]}
+{"kind":"shape","id":"sh/tkby9kzm","slide":8,"bbox":[476,190,560,116]}
+{"kind":"shape","id":"sh/sjix0zy1","slide":8,"bbox":[476,190,7,116]}
+{"kind":"textbox","id":"sh/je9g3ahk","slide":8,"text":"Terminal launch","textPreview":"Terminal launch","textChars":15,"textLines":1,"bbox":[500,208,518,30]}
+{"kind":"textbox","id":"sh/id0fu50z","slide":8,"text":"./Scripts/run-simulator.sh walkthrough","textPreview":"./Scripts/run-simulator.sh walkthrough","textChars":38,"textLines":1,"bbox":[500,246,518,44]}
+{"kind":"shape","id":"sh/o7ydoret","slide":8,"bbox":[476,334,560,142]}
+{"kind":"shape","id":"sh/98rehwve","slide":8,"bbox":[476,334,7,142]}
+{"kind":"textbox","id":"sh/m5gvmhwn","slide":8,"text":"What it shows","textPreview":"What it shows","textChars":13,"textLines":1,"bbox":[500,352,518,30]}
+{"kind":"textbox","id":"sh/n6pwfmd8","slide":8,"text":"Journey overview, passenger details, weather, layover choices, map guidance, AR preview, and return-to-gate behavior.","textPreview":"Journey overview, passenger details, weather, layover choices, map guidance, AR preview, and return-to-gate behavior.","textChars":117,"textLines":1,"bbox":[500,390,518,70]}
+{"kind":"shape","id":"sh/0jydkreh","slide":8,"bbox":[476,504,560,116]}
+{"kind":"shape","id":"sh/1k7edwv2","slide":8,"bbox":[476,504,7,116]}
+{"kind":"textbox","id":"sh/ehgvihwr","slide":8,"text":"Why it helps","textPreview":"Why it helps","textChars":12,"textLines":1,"bbox":[500,522,518,30]}
+{"kind":"textbox","id":"sh/zipwbmdc","slide":8,"text":"A reviewer can see the full story even without live provider credentials or a physical-device AR setup.","textPreview":"A reviewer can see the full story even without live provider credentials or a physical-device AR setup.","textChars":103,"textLines":1,"bbox":[500,560,518,44]}
+{"kind":"image","id":"im/mt47qt0z","slide":8,"name":"","geometry":"roundRect","bbox":[131.69,176,222.62,484]}
+{"kind":"notes","id":"nt/fu1gfa1s","slide":8,"text":""}
+{"kind":"slide","id":"sl/udsvah03","slide":9,"title":"AIRBORDER","textShapes":17}
+{"kind":"textbox","id":"sh/apofe5of","slide":9,"text":"AIRBORDER","textPreview":"AIRBORDER","textChars":9,"textLines":1,"bbox":[72,42,280,24]}
+{"kind":"textbox","id":"sh/1cfmhgne","slide":9,"text":"Wireframes organize the app around traveler jobs","textPreview":"Wireframes organize the app around traveler jobs","textChars":48,"textLines":1,"bbox":[72,76,980,52]}
+{"kind":"shape","id":"sh/0b65obm9","slide":9,"bbox":[72,142,1136,3]}
+{"kind":"shape","id":"sh/nex4jq5k","slide":9,"bbox":[75,186,184,360]}
+{"kind":"textbox","id":"sh/mdonql4z","slide":9,"text":"Journey","textPreview":"Journey","textChars":7,"textLines":1,"bbox":[93,212,148,40]}
+{"kind":"shape","id":"sh/9gzml0nq","slide":9,"bbox":[93,270,148,3]}
+{"kind":"textbox","id":"sh/ofq5svm5","slide":9,"text":"Flight timeline\nGate + boarding\nReturn route\nWeather outlook","textPreview":"Flight timeline | Gate + boarding | Return route | Weather outlook","textChars":60,"textLines":4,"bbox":[93,300,148,170]}
+{"kind":"shape","id":"sh/bih4na5w","slide":9,"bbox":[103,486,128,34]}
+{"kind":"textbox","id":"sh/ah8nu54b","slide":9,"text":"Open","textPreview":"Open","textChars":4,"textLines":1,"bbox":[123,491,88,22]}
+{"kind":"shape","id":"sh/oza1gfyh","slide":9,"bbox":[303,186,184,360]}
+{"kind":"textbox","id":"sh/p0ji9kf2","slide":9,"text":"Flights","textPreview":"Flights","textChars":7,"textLines":1,"bbox":[321,212,148,40]}
+{"kind":"shape","id":"sh/2xsjepgb","slide":9,"bbox":[321,270,148,3]}
+{"kind":"textbox","id":"sh/3y107axw","slide":9,"text":"Add / scan ticket\nBook & bags\nConnection steps\nProvider refresh","textPreview":"Add / scan ticket | Book & bags | Connection steps | Provider refresh","textChars":63,"textLines":4,"bbox":[321,300,148,170]}
+{"kind":"shape","id":"sh/cnu1kzyd","slide":9,"bbox":[331,486,128,34]}
+{"kind":"textbox","id":"sh/do3id4fy","slide":9,"text":"Open","textPreview":"Open","textChars":4,"textLines":1,"bbox":[351,491,88,22]}
+{"kind":"shape","id":"sh/qlcjipgn","slide":9,"bbox":[531,186,184,360]}
+{"kind":"textbox","id":"sh/bml0buxs","slide":9,"text":"Layover","textPreview":"Layover","textChars":7,"textLines":1,"bbox":[549,212,148,40]}
+{"kind":"shape","id":"sh/0ru1ozyp","slide":9,"bbox":[549,270,148,3]}
+{"kind":"textbox","id":"sh/lsn2h4fa","slide":9,"text":"Airport services\nNearby hotels\nFood + shops\nCity visit options","textPreview":"Airport services | Nearby hotels | Food + shops | City visit options","textChars":62,"textLines":4,"bbox":[549,300,148,170]}
+{"kind":"shape","id":"sh/98ji147e","slide":9,"bbox":[559,486,128,34]}
+{"kind":"textbox","id":"sh/87a18zqt","slide":9,"text":"Open","textPreview":"Open","textChars":4,"textLines":1,"bbox":[579,491,88,22]}
+{"kind":"shape","id":"sh/76h0zup8","slide":9,"bbox":[759,186,184,360]}
+{"kind":"textbox","id":"sh/ml8j6p8n","slide":9,"text":"Map / AR","textPreview":"Map / AR","textChars":8,"textLines":1,"bbox":[777,212,148,40]}
+{"kind":"shape","id":"sh/hcji5o7a","slide":9,"bbox":[777,270,148,3]}
+{"kind":"textbox","id":"sh/wba1cjqp","slide":9,"text":"Venue route\nIndoor steps\nDirection arrows\nBack-to-gate","textPreview":"Venue route | Indoor steps | Direction arrows | Back-to-gate","textChars":54,"textLines":4,"bbox":[777,300,148,170]}
+{"kind":"shape","id":"sh/va103ep4","slide":9,"bbox":[787,486,128,34]}
+{"kind":"textbox","id":"sh/u9sja98z","slide":9,"text":"Open","textPreview":"Open","textChars":4,"textLines":1,"bbox":[807,491,88,22]}
+{"kind":"shape","id":"sh/xgzitk76","slide":9,"bbox":[987,186,184,360]}
+{"kind":"textbox","id":"sh/cf6h0fql","slide":9,"text":"Profile","textPreview":"Profile","textChars":7,"textLines":1,"bbox":[1005,212,148,40]}
+{"kind":"shape","id":"sh/2l4faloj","slide":9,"bbox":[1005,270,148,3]}
+{"kind":"textbox","id":"sh/nmdg3q54","slide":9,"text":"Nationality text\nDocuments\nBudget\nAccessibility","textPreview":"Nationality text | Documents | Budget | Accessibility","textChars":47,"textLines":4,"bbox":[1005,300,148,170]}
+{"kind":"shape","id":"sh/onmxcv69","slide":9,"bbox":[1015,486,128,34]}
+{"kind":"textbox","id":"sh/pofy50nu","slide":9,"text":"Open","textPreview":"Open","textChars":4,"textLines":1,"bbox":[1035,491,88,22]}
+{"kind":"notes","id":"nt/udsvah03","slide":9,"text":""}
+{"kind":"slide","id":"sl/m90b6t0r","slide":10,"title":"AIRBORDER","textShapes":9}
+{"kind":"textbox","id":"sh/fapcz6ls","slide":10,"text":"AIRBORDER","textPreview":"AIRBORDER","textChars":9,"textLines":1,"bbox":[72,42,280,24]}
+{"kind":"textbox","id":"sh/xc3mho32","slide":10,"text":"Design choices follow airline-app conventions and usability principles","textPreview":"Design choices follow airline-app conventions and usability principles","textChars":70,"textLines":1,"bbox":[72,76,980,52]}
+{"kind":"shape","id":"sh/cbu58j2h","slide":10,"bbox":[72,142,1136,3]}
+{"kind":"shape","id":"sh/zelojyl8","slide":10,"bbox":[72,182,350,210]}
+{"kind":"shape","id":"sh/ydcnatkn","slide":10,"bbox":[72,182,7,210]}
+{"kind":"textbox","id":"sh/l036l83y","slide":10,"text":"Day-of-travel hierarchy","textPreview":"Day-of-travel hierarchy","textChars":23,"textLines":1,"bbox":[96,200,308,30]}
+{"kind":"textbox","id":"sh/kzu5c32t","slide":10,"text":"Delta, American, and Singapore Airlines all foreground trip status, boarding passes, gate changes, and alerts. AirBorder makes the active layover the home screen.","textPreview":"Delta, American, and Singapore Airlines all foreground trip status, boarding passes, gate changes, and alerts. AirBorder makes the active...","textChars":162,"textLines":1,"bbox":[96,238,308,138]}
+{"kind":"shape","id":"sh/725onyl4","slide":10,"bbox":[465,182,350,210]}
+{"kind":"shape","id":"sh/m1cnetkj","slide":10,"bbox":[465,182,7,210]}
+{"kind":"textbox","id":"sh/s7yt4b21","slide":10,"text":"Visible system status","textPreview":"Visible system status","textChars":21,"textLines":1,"bbox":[489,200,308,30]}
+{"kind":"textbox","id":"sh/d87uxg3m","slide":10,"text":"The interface explains current gate, route state, weather, and refresh state in user language so passengers know what changed.","textPreview":"The interface explains current gate, route state, weather, and refresh state in user language so passengers know what changed.","textChars":126,"textLines":1,"bbox":[489,238,308,138]}
+{"kind":"shape","id":"sh/q5gb21kb","slide":10,"bbox":[858,182,350,210]}
+{"kind":"shape","id":"sh/r6pcv6lw","slide":10,"bbox":[858,182,7,210]}
+{"kind":"textbox","id":"sh/0bit8b2d","slide":10,"text":"Clear exit path","textPreview":"Clear exit path","textChars":15,"textLines":1,"bbox":[882,200,308,30]}
+{"kind":"textbox","id":"sh/1cru1g3y","slide":10,"text":"A persistent return-to-gate action acts like an emergency exit: it gets the user back to the main travel objective from any screen.","textPreview":"A persistent return-to-gate action acts like an emergency exit: it gets the user back to the main travel objective from any screen.","textChars":131,"textLines":1,"bbox":[882,238,308,138]}
+{"kind":"textbox","id":"sh/e9gb61k7","slide":10,"text":"Sources: Delta mobile app, American Airlines app, SingaporeAir app, Nielsen Norman Group usability heuristics.","textPreview":"Sources: Delta mobile app, American Airlines app, SingaporeAir app, Nielsen Norman Group usability heuristics.","textChars":110,"textLines":1,"bbox":[84,510,1060,32]}
+{"kind":"notes","id":"nt/m90b6t0r","slide":10,"text":""}
+{"kind":"slide","id":"sl/jetc3ut0","slide":11,"title":"AIRBORDER","textShapes":15}
+{"kind":"textbox","id":"sh/o7axk7m9","slide":11,"text":"AIRBORDER","textPreview":"AIRBORDER","textChars":9,"textLines":1,"bbox":[72,42,280,24]}
+{"kind":"textbox","id":"sh/xcryxg7y","slide":11,"text":"Architecture separates live facts, cached facts, and personal learning","textPreview":"Architecture separates live facts, cached facts, and personal learning","textChars":70,"textLines":1,"bbox":[72,76,980,52]}
+{"kind":"shape","id":"sh/wbih4b6d","slide":11,"bbox":[72,142,1136,3]}
+{"kind":"shape","id":"sh/n69grmpw","slide":11,"bbox":[72,188,250,150]}
+{"kind":"shape","id":"sh/250zy18b","slide":11,"bbox":[72,188,7,150]}
+{"kind":"textbox","id":"sh/98rytw72","slide":11,"text":"Itinerary","textPreview":"Itinerary","textChars":9,"textLines":1,"bbox":[96,206,208,30]}
+{"kind":"textbox","id":"sh/o7ih0r6h","slide":11,"text":"Multi-leg flights, airport changes, gates, and layovers","textPreview":"Multi-leg flights, airport changes, gates, and layovers","textChars":55,"textLines":1,"bbox":[96,244,208,78]}
+{"kind":"shape","id":"sh/72t03qp0","slide":11,"bbox":[358,188,250,150]}
+{"kind":"shape","id":"sh/61kzalof","slide":11,"bbox":[358,188,7,150]}
+{"kind":"textbox","id":"sh/ofqtgnyt","slide":11,"text":"Traveler profile","textPreview":"Traveler profile","textChars":16,"textLines":1,"bbox":[382,206,208,30]}
+{"kind":"textbox","id":"sh/9gza9sze","slide":11,"text":"Nationality, documents, budget, fatigue, accessibility","textPreview":"Nationality, documents, budget, fatigue, accessibility","textChars":54,"textLines":1,"bbox":[382,244,208,78]}
+{"kind":"shape","id":"sh/mdobedg3","slide":11,"bbox":[644,188,250,150]}
+{"kind":"shape","id":"sh/nehs7iho","slide":11,"bbox":[644,188,7,150]}
+{"kind":"textbox","id":"sh/0b6tc3yx","slide":11,"text":"Provider proxy","textPreview":"Provider proxy","textChars":14,"textLines":1,"bbox":[668,206,208,30]}
+{"kind":"textbox","id":"sh/1cfa58zi","slide":11,"text":"Flights, hotels, places, facilities, weather, entry links","textPreview":"Flights, hotels, places, facilities, weather, entry links","textChars":57,"textLines":1,"bbox":[668,244,208,78]}
+{"kind":"shape","id":"sh/epobatgr","slide":11,"bbox":[930,188,250,150]}
+{"kind":"shape","id":"sh/zaxs3yhc","slide":11,"bbox":[930,188,7,150]}
+{"kind":"textbox","id":"sh/cn6t83y1","slide":11,"text":"On-device cache","textPreview":"On-device cache","textChars":15,"textLines":1,"bbox":[954,206,208,30]}
+{"kind":"textbox","id":"sh/dofa18z6","slide":11,"text":"Freshness rules, replay, private personalization","textPreview":"Freshness rules, replay, private personalization","textChars":48,"textLines":1,"bbox":[954,244,208,78]}
+{"kind":"shape","id":"sh/tsnip0ny","slide":11,"bbox":[190,428,180,86]}
+{"kind":"textbox","id":"sh/87ehgv6d","slide":11,"text":"Build context","textPreview":"Build context","textChars":13,"textLines":1,"bbox":[206,446,148,58]}
+{"kind":"shape","id":"sh/7650nq5s","slide":11,"bbox":[384,471,30,0]}
+{"kind":"shape","id":"sh/65wzelo7","slide":11,"bbox":[428,428,180,86]}
+{"kind":"textbox","id":"sh/l43ilgn2","slide":11,"text":"Compare plans","textPreview":"Compare plans","textChars":13,"textLines":1,"bbox":[444,446,148,58]}
+{"kind":"shape","id":"sh/k3uhcb6h","slide":11,"bbox":[622,471,30,0]}
+{"kind":"shape","id":"sh/j2lgjq5w","slide":11,"bbox":[666,428,180,86]}
+{"kind":"textbox","id":"sh/y1czalob","slide":11,"text":"Route user","textPreview":"Route user","textChars":10,"textLines":1,"bbox":[682,446,148,58]}
+{"kind":"shape","id":"sh/p07ixkn6","slide":11,"bbox":[860,471,30,0]}
+{"kind":"shape","id":"sh/4zyhofml","slide":11,"bbox":[904,428,180,86]}
+{"kind":"textbox","id":"sh/m58fih43","slide":11,"text":"Notify changes","textPreview":"Notify changes","textChars":14,"textLines":1,"bbox":[920,446,148,58]}
+{"kind":"textbox","id":"sh/n61wbmlo","slide":11,"text":"Provider keys stay on the backend/proxy. The app receives normalized facts and only uses private on-device learning for personal walking, queue, route, and preference patterns.","textPreview":"Provider keys stay on the backend/proxy. The app receives normalized facts and only uses private on-device learning for personal walking,...","textChars":176,"textLines":1,"bbox":[120,568,1040,56]}
+{"kind":"notes","id":"nt/jetc3ut0","slide":11,"text":""}
+{"kind":"slide","id":"sl/8f2psfyx","slide":12,"title":"AIRBORDER","textShapes":8}
+{"kind":"textbox","id":"sh/0nap8f6l","slide":12,"text":"AIRBORDER","textPreview":"AIRBORDER","textChars":9,"textLines":1,"bbox":[72,42,280,24]}
+{"kind":"textbox","id":"sh/1gbm9s3a","slide":12,"text":"Demo and validation are ready for review","textPreview":"Demo and validation are ready for review","textChars":40,"textLines":1,"bbox":[72,76,980,52]}
+{"kind":"shape","id":"sh/0f2lgnmp","slide":12,"bbox":[72,142,1136,3]}
+{"kind":"shape","id":"sh/ra943il8","slide":12,"bbox":[70,174,325,478]}
+{"kind":"shape","id":"sh/dcbm583y","slide":12,"bbox":[452,188,620,118]}
+{"kind":"shape","id":"sh/sb2lcnmd","slide":12,"bbox":[452,188,7,118]}
+{"kind":"textbox","id":"sh/b6d4f2lc","slide":12,"text":"Launch commands","textPreview":"Launch commands","textChars":15,"textLines":1,"bbox":[476,206,578,30]}
+{"kind":"textbox","id":"sh/a543mx4r","slide":12,"text":"demo · walkthrough · ar-preview · weather · city-map · signal-location","textPreview":"demo · walkthrough · ar-preview · weather · city-map · signal-location","textChars":70,"textLines":1,"bbox":[476,244,578,46]}
+{"kind":"shape","id":"sh/wvupgz6t","slide":12,"bbox":[452,336,620,118]}
+{"kind":"shape","id":"sh/xw3q94ne","slide":12,"bbox":[452,336,7,118]}
+{"kind":"textbox","id":"sh/atc7epon","slide":12,"text":"Automated checks","textPreview":"Automated checks","textChars":16,"textLines":1,"bbox":[476,354,578,30]}
+{"kind":"textbox","id":"sh/bulo7u58","slide":12,"text":"Flight operational intelligence: 23 tests, 0 failures. Journey UI smoke test: passed after the launch fix.","textPreview":"Flight operational intelligence: 23 tests, 0 failures. Journey UI smoke test: passed after the launch fix.","textChars":106,"textLines":1,"bbox":[476,392,578,46]}
+{"kind":"shape","id":"sh/orapcf6h","slide":12,"bbox":[452,484,620,118]}
+{"kind":"shape","id":"sh/9sj65kn2","slide":12,"bbox":[452,484,7,118]}
+{"kind":"textbox","id":"sh/mps7a5or","slide":12,"text":"Next build priorities","textPreview":"Next build priorities","textChars":21,"textLines":1,"bbox":[476,502,578,30]}
+{"kind":"textbox","id":"sh/nq1o3a5w","slide":12,"text":"Live provider credentials, real indoor airport map partnerships, physical-device AR testing, and two-device calendar/reminder verification.","textPreview":"Live provider credentials, real indoor airport map partnerships, physical-device AR testing, and two-device calendar/reminder verification.","textChars":139,"textLines":1,"bbox":[476,540,578,46]}
+{"kind":"image","id":"im/uxknq14z","slide":12,"name":"","geometry":"roundRect","bbox":[127.17,184,210.66,458]}
+{"kind":"notes","id":"nt/8f2psfyx","slide":12,"text":""}
+{"kind":"slide","id":"sl/hgzapcr6","slide":13,"title":"AirBorder turns a stressful layover into a clear travel plan.","textShapes":3}
+{"kind":"textbox","id":"sh/p4r6p8by","slide":13,"text":"AirBorder turns a stressful layover into a clear travel plan.","textPreview":"AirBorder turns a stressful layover into a clear travel plan.","textChars":61,"textLines":1,"bbox":[90,112,1000,154]}
+{"kind":"textbox","id":"sh/q50nydsj","slide":13,"text":"The system combines itinerary context, airport services, maps, baggage/entry guidance, weather, cost, and alerts into one passenger-facing experience.","textPreview":"The system combines itinerary context, airport services, maps, baggage/entry guidance, weather, cost, and alerts into one passenger-facin...","textChars":150,"textLines":1,"bbox":[94,310,900,90]}
+{"kind":"shape","id":"sh/bq9orito","slide":13,"bbox":[94,455,720,3]}
+{"kind":"textbox","id":"sh/o3i5w3ad","slide":13,"text":"Demo: ./Scripts/run-simulator.sh walkthrough","textPreview":"Demo: ./Scripts/run-simulator.sh walkthrough","textChars":44,"textLines":1,"bbox":[94,496,780,42]}
+{"kind":"notes","id":"nt/hgzapcr6","slide":13,"text":""}

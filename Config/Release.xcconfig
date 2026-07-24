@@ -1,0 +1,6 @@
+#include? "Secrets.xcconfig"
+
+AVIATION_PROXY_BASE_URL =
+CLOUD_VISION_PROXY_BASE_URL =
+AVIATION_PROVIDER_LABEL = FlightAware AeroAPI via secure proxy
+SWIFT_ACTIVE_COMPILATION_CONDITIONS = $(inherited) RELEASE
