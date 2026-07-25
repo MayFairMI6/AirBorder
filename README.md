@@ -38,8 +38,8 @@ To run only the deterministic unit target:
 
 ```bash
 xcodebuild \
-  -project AirportXRCompanion.xcodeproj \
-  -scheme AirportXRCompanion \
+  -project AirBorder.xcodeproj \
+  -scheme AirBorder \
   -destination 'platform=iOS Simulator,name=iPhone 17 Pro' \
   -derivedDataPath build/DerivedData \
   CODE_SIGNING_ALLOWED=NO \
