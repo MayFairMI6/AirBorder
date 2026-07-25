@@ -25,6 +25,9 @@ struct FlightsView: View {
     var body: some View {
         ScrollView {
             LazyVStack(spacing: 16) {
+                if longHaulViewModel.ticketScanResult == nil {
+                    ticketPDFCard
+                }
                 itineraryEditor
 
                 Picker("Flight lookup mode", selection: $mode) {
@@ -215,7 +218,9 @@ struct FlightsView: View {
                 }
             }
 
-            ticketPDFCard
+            if longHaulViewModel.ticketScanResult != nil {
+                ticketPDFCard
+            }
 
             if let itinerary = longHaulViewModel.itinerary, itinerary.legs.count > 1 {
                 VStack(alignment: .leading, spacing: 10) {
@@ -388,9 +393,11 @@ struct FlightsView: View {
             VStack(alignment: .leading, spacing: 12) {
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 4) {
-                        Label("Saved tickets", systemImage: "doc.text.viewfinder")
+                        Label(longHaulViewModel.ticketScanResult == nil ? "Add your ticket" : "Saved ticket", systemImage: "doc.text.viewfinder")
                             .font(.title3.bold())
-                        Text("Add a ticket or boarding-pass PDF to keep its trip details with this itinerary.")
+                        Text(longHaulViewModel.ticketScanResult == nil
+                             ? "Add your ticket or boarding pass and we’ll set up the right connection plan."
+                             : "Your ticket sets up the connection plan for this trip.")
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                     }
@@ -419,7 +426,7 @@ struct FlightsView: View {
                         Button {
                             Task { await longHaulViewModel.applyScannedTicketRoute() }
                         } label: {
-                            Label("Use this route", systemImage: "arrow.triangle.branch")
+                            Label("Update route", systemImage: "arrow.triangle.branch")
                                 .frame(maxWidth: .infinity, minHeight: 44)
                         }
                         .buttonStyle(.bordered)
@@ -435,7 +442,7 @@ struct FlightsView: View {
                     Button {
                         isImportingTicketPDF = true
                     } label: {
-                        Label(longHaulViewModel.ticketScanResult == nil ? "Add ticket PDF" : "Replace ticket PDF", systemImage: "plus")
+                        Label(longHaulViewModel.ticketScanResult == nil ? "Add ticket" : "Replace ticket", systemImage: "plus")
                             .frame(maxWidth: .infinity, minHeight: 44)
                     }
                     .buttonStyle(.borderedProminent)

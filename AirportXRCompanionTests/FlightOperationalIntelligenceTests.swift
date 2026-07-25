@@ -635,6 +635,27 @@ final class FlightOperationalIntelligenceTests: XCTestCase {
         XCTAssertEqual(statuses[0].transferFlow, .standardConnection)
     }
 
+    func testAutomaticTransferTicketKeepsTheConnectionAtHaneda() throws {
+        let itinerary = LongHaulReferenceScenario.itinerary(anchor: now)
+        let scan = try TicketPDFScanService.scanText(
+            "ROUTE BKK HND LAX\nAUTOMATIC TRANSFER\nBAG TAG DESTINATION LAX",
+            at: now
+        )
+
+        let statuses = TicketConnectionStatusService().statuses(
+            for: itinerary,
+            scan: scan,
+            travelerProfile: .minimalDemo,
+            entryAssessment: currentEntryAssessment(status: .authorizationNotIndicated),
+            now: now
+        )
+
+        XCTAssertEqual(scan.routeAirportCodes, ["BKK", "HND", "LAX"])
+        XCTAssertTrue(scan.baggageSignals.contains(.automaticTransfer))
+        XCTAssertEqual(statuses.first?.baggageAssessment.state, .throughChecked)
+        XCTAssertEqual(statuses.first?.transferFlow, .standardConnection)
+    }
+
     func testTicketScanBuildsRecheckStatusForInterAirportConnection() throws {
         let itinerary = LongHaulReferenceScenario.hanedaToNaritaItinerary(anchor: now)
         let scan = try TicketPDFScanService.scanText(

@@ -1,3 +1,4 @@
+import MapKit
 import SwiftUI
 
 private enum ARWalkPreviewPolicy {
@@ -24,10 +25,15 @@ struct ARGuideView: View {
     @State private var simulatedReadingIndex = 0
     @State private var externalReading: IndoorLocationReading?
     @State private var externalFeedStatus = "Waiting for indoor position"
+    @State private var showsCityTransferGuide = false
 
     var body: some View {
         Group {
             if let layover = viewModel.activeLayover,
+               layover.isInterAirportTransfer,
+               showsCityTransferGuide {
+                cityTransferGuide(layover)
+            } else if let layover = viewModel.activeLayover,
                       layover.isInterAirportTransfer,
                       viewModel.terminalRoute == nil {
                 outdoorGuide(
@@ -120,7 +126,11 @@ struct ARGuideView: View {
                 Spacer()
 
                 Button {
-                    container.selectedTab = .transit
+                    if viewModel.requiresInterAirportTransfer {
+                        showsCityTransferGuide = true
+                    } else {
+                        container.selectedTab = .transit
+                    }
                 } label: {
                     Label(actionTitle, systemImage: "map.fill")
                         .frame(maxWidth: .infinity, minHeight: 48)
@@ -136,6 +146,88 @@ struct ARGuideView: View {
             .padding()
         }
         .accessibilityIdentifier("arOutdoorGuide")
+    }
+
+    private func cityTransferGuide(_ layover: LayoverContext) -> some View {
+        let configuration = CityTransferPracticeMapConfiguration.matching(
+            origin: layover.airport.iata,
+            destination: layover.onwardAirport.iata
+        )
+        return ZStack(alignment: .bottom) {
+            if let configuration {
+                Map(initialPosition: .region(cityTransferRegion(for: configuration))) {
+                    Marker(layover.airport.iata, coordinate: configuration.originCoordinate).tint(.teal)
+                    Marker(layover.onwardAirport.iata, coordinate: configuration.destinationCoordinate).tint(.green)
+                }
+                .ignoresSafeArea(edges: .bottom)
+            } else {
+                Color(.systemGroupedBackground).ignoresSafeArea()
+            }
+
+            VStack(alignment: .leading, spacing: 12) {
+                HStack(alignment: .top) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("CITY TRANSFER GUIDE")
+                            .font(.caption.weight(.bold))
+                            .foregroundStyle(.teal)
+                        Text("\(layover.airport.iata) → \(layover.onwardAirport.iata)")
+                            .font(.title2.bold())
+                        if let option = viewModel.interAirportTransferPlan?.selected {
+                            Text("Quickest direct route: \(option.title)")
+                                .font(.subheadline.weight(.semibold))
+                            Text(option.duration.map { "About \(Int($0.value.mostLikely.rounded())) min" } ?? "Check travel time")
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        } else {
+                            Text("Open Apple Maps for the route to your next airport.")
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                    Spacer()
+                    Image(systemName: "map.fill")
+                        .font(.title2)
+                        .foregroundStyle(.teal)
+                }
+
+                Button {
+                    openTransferInMaps(layover, configuration: configuration)
+                } label: {
+                    Label("Navigate in Apple Maps", systemImage: "arrow.triangle.turn.up.right.diamond.fill")
+                        .frame(maxWidth: .infinity, minHeight: 48)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.teal)
+
+                Button {
+                    showsCityTransferGuide = false
+                } label: {
+                    Label("AR terminal guide", systemImage: "viewfinder")
+                        .frame(maxWidth: .infinity, minHeight: 44)
+                }
+                .buttonStyle(.bordered)
+            }
+            .padding()
+            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 22))
+            .padding()
+        }
+        .accessibilityIdentifier("arCityTransferGuide")
+    }
+
+    private func cityTransferRegion(for configuration: CityTransferPracticeMapConfiguration) -> MKCoordinateRegion {
+        MKCoordinateRegion(
+            center: configuration.center,
+            span: MKCoordinateSpan(latitudeDelta: configuration.latitudeDelta, longitudeDelta: configuration.longitudeDelta)
+        )
+    }
+
+    private func openTransferInMaps(_ layover: LayoverContext, configuration: CityTransferPracticeMapConfiguration?) {
+        guard let configuration else { return }
+        let destination = MKMapItem(placemark: MKPlacemark(coordinate: configuration.destinationCoordinate))
+        destination.name = "\(layover.onwardAirport.iata) Airport"
+        destination.openInMaps(launchOptions: [
+            MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeTransit
+        ])
     }
 
     private var guide: some View {
@@ -301,10 +393,9 @@ struct ARGuideView: View {
 
             if viewModel.requiresInterAirportTransfer {
                 Button {
-                    container.selectedTab = .transit
-                    dismiss()
+                    showsCityTransferGuide = true
                 } label: {
-                    Label("Open transfer plan", systemImage: "arrow.triangle.swap")
+                    Label("City transfer guide", systemImage: "map.fill")
                         .frame(maxWidth: .infinity, minHeight: 44)
                 }
                 .buttonStyle(.bordered)

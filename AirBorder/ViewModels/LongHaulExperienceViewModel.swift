@@ -436,12 +436,7 @@ final class LongHaulExperienceViewModel: ObservableObject {
                 ? try scanner.scanPDF(data: data, fileName: fileName, at: now())
                 : try scanner.scanImage(data: data, fileName: fileName, at: now())
             ticketScanResult = result
-            updateTicketConnectionStatuses()
-            applyTicketConnectionFlows()
-            await persistAndRebuild()
-            ticketScanMessage = ticketConnectionStatuses.isEmpty
-                ? "Ticket added. Add at least two flights to compare bag and transit details."
-                : "Ticket added. Review each connection below."
+            await applyScannedTicketRoute()
         } catch {
             ticketScanMessage = error.localizedDescription
         }
@@ -501,7 +496,9 @@ final class LongHaulExperienceViewModel: ObservableObject {
         updateTicketConnectionStatuses()
         applyTicketConnectionFlows()
         await persistAndRebuild()
-        ticketScanMessage = "Route added. Check flight times and airport details."
+        ticketScanMessage = ticketConnectionStatuses.isEmpty
+            ? "Ticket added. Add flight times when they are available."
+            : "Ticket added. Your connection plan is ready."
     }
 
     func clearTicketScan() {

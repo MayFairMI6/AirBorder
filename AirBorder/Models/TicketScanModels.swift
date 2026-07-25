@@ -4,6 +4,7 @@ enum TicketScanBaggageSignal: Codable, Hashable, Sendable {
     case bagTagDestination(String)
     case collectAndRecheck
     case selfTransfer
+    case automaticTransfer
     case noCheckedBag
     case unknown
 }

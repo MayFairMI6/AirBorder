@@ -113,6 +113,9 @@ struct TicketPDFScanService: Sendable {
         if containsAny(uppercased, ["SELF TRANSFER", "SEPARATE TICKET", "SEPARATE TICKETS"]) {
             signals.append(.selfTransfer)
         }
+        if containsAny(uppercased, ["AUTO TRANSFER", "AUTOMATIC TRANSFER", "THROUGH TRANSFER", "PROTECTED CONNECTION"]) {
+            signals.append(.automaticTransfer)
+        }
         if containsAny(uppercased, ["RECHECK", "RE-CHECK", "COLLECT BAG", "CLAIM BAG", "RECLAIM BAG", "BAGGAGE CLAIM"]) {
             signals.append(.collectAndRecheck)
         }
@@ -202,7 +205,7 @@ struct TicketConnectionStatusService: Sendable {
         }.last
 
         let state: ConnectionBaggageState
-        if scan.baggageSignals.contains(.noCheckedBag) {
+        if scan.baggageSignals.contains(.noCheckedBag) || scan.baggageSignals.contains(.automaticTransfer) {
             state = .throughChecked
         } else if scan.baggageSignals.contains(.selfTransfer) {
             state = .selfTransferSeparateTicket
@@ -302,7 +305,11 @@ struct TicketConnectionStatusService: Sendable {
     private func baggageInstructions(for state: ConnectionBaggageState, destination: String?) -> [String] {
         switch state {
         case .throughChecked:
-            [destination.map { "Ticket text shows bags continuing to \($0)." } ?? "Ticket text shows no checked-bag collection."]
+            if destination != nil {
+                ["Your ticket shows your bags continuing to \(destination!)."]
+            } else {
+                ["Your ticket shows an automatic connection."]
+            }
         case .reclaimImmigrationCustomsRecheck:
             ["Ticket text indicates bag collection and recheck."]
         case .selfTransferSeparateTicket:
