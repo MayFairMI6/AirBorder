@@ -555,14 +555,14 @@ enum InterAirportCandidateFactory {
         )
         let visitPlace = LayoverPlace(
             id: "demo-hnd-nrt-on-route-stop",
-            name: "Recommended stop along your transfer",
-            airportCode: layover.airport.iata,
+            name: "Recommended stop near \(layover.onwardAirport.iata)",
+            airportCode: layover.onwardAirport.iata,
             terminal: nil,
             category: .attraction,
             accessZone: .nearby,
             latitude: nil,
             longitude: nil,
-            summary: "Recommended stop positioned along the transfer route.",
+            summary: "A nearby stop after arriving at the next airport.",
             bookingURL: nil,
             officialSourceURL: nil,
             dataMode: .demo
@@ -594,7 +594,7 @@ enum InterAirportCandidateFactory {
             title: "Continue from the stop to Narita"
         )
         let visit = PlanCandidate(
-            title: "Recommended transfer stop",
+            title: "Recommended nearby visit near \(layover.onwardAirport.iata)",
             place: visitPlace,
             // The transfer is split around the stop. This prevents the
             // assessment from incorrectly adding a full HND→NRT transfer and
