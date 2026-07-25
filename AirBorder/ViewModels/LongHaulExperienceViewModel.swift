@@ -376,6 +376,24 @@ final class LongHaulExperienceViewModel: ObservableObject {
         calculateTerminalRoute(preferredDestinationNodeID: nil, title: "Gate", forceGate: true)
     }
 
+    /// Starts the bundled terminal-route preview when the current journey is an
+    /// airport change. The preview graph is a deliberate proof-of-concept, so
+    /// it is kept separate from the real inter-airport transfer plan.
+    func startDemoTerminalPreviewIfAvailable() {
+        guard terminalGraph.version.hasPrefix("demo-"),
+              let destination = demoPreviewDestinationNodeID else { return }
+
+        destinationNodeID = destination
+        terminalRouteTitle = terminalGraph.nodes.first(where: { $0.id == destination })?.name ?? "Gate"
+        terminalRoute = try? router.route(
+            in: terminalGraph,
+            from: currentNodeID,
+            to: destination,
+            mode: routeMode,
+            preferences: preferences.accessibility
+        )
+    }
+
     func routeToTerminalPlace(_ nodeID: String) {
         guard let node = terminalGraph.nodes.first(where: { $0.id == nodeID }) else { return }
         calculateTerminalRoute(preferredDestinationNodeID: nodeID, title: node.name)
@@ -968,6 +986,16 @@ final class LongHaulExperienceViewModel: ObservableObject {
             mode: routeMode,
             preferences: preferences.accessibility
         )
+    }
+
+    private var demoPreviewDestinationNodeID: String? {
+        if let gate = activeGate {
+            let gateNodeID = "gate-\(gate.lowercased())"
+            if terminalGraph.nodes.contains(where: { $0.id == gateNodeID }) {
+                return gateNodeID
+            }
+        }
+        return terminalGraph.nodes.first(where: { $0.kind == .gate })?.id
     }
 
     private func destinationWeather(at date: Date) async -> SourcedMetric<String>? {

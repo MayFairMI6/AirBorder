@@ -60,7 +60,7 @@ struct RootTabView: View {
                 .tag(AppTab.terminalMap)
 
             tabRoot { ARGuideView() }
-                .tabItem { Label("AR Route", systemImage: "viewfinder") }
+                .tabItem { Label("AR Guide", systemImage: "viewfinder") }
                 .tag(AppTab.arGuide)
 
             tabRoot { SettingsView() }

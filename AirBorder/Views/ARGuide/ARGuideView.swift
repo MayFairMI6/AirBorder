@@ -27,7 +27,9 @@ struct ARGuideView: View {
 
     var body: some View {
         Group {
-            if let layover = viewModel.activeLayover, layover.isInterAirportTransfer {
+            if let layover = viewModel.activeLayover,
+                      layover.isInterAirportTransfer,
+                      viewModel.terminalRoute == nil {
                 outdoorGuide(
                     title: "Transfer to \(layover.onwardAirport.iata)",
                     subtitle: "Follow your selected coach, rail, or road route.",
@@ -60,6 +62,9 @@ struct ARGuideView: View {
         .navigationTitle("AR Guide")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
+            if viewModel.requiresInterAirportTransfer, viewModel.terminalRoute == nil {
+                viewModel.startDemoTerminalPreviewIfAvailable()
+            }
             if viewModel.launchContext.usesSimulatedTerminalWalk {
                 if viewModel.launchContext.externalIndoorSignalURL == nil,
                    !viewModel.launchContext.usesCoreLocationIndoorQA {
@@ -293,6 +298,17 @@ struct ARGuideView: View {
                 .buttonStyle(.bordered)
             }
             mapFallbackButton
+
+            if viewModel.requiresInterAirportTransfer {
+                Button {
+                    container.selectedTab = .transit
+                    dismiss()
+                } label: {
+                    Label("Open transfer plan", systemImage: "arrow.triangle.swap")
+                        .frame(maxWidth: .infinity, minHeight: 44)
+                }
+                .buttonStyle(.bordered)
+            }
 
             Label("Look up while walking.", systemImage: "eye.fill")
                 .font(.caption).foregroundStyle(.secondary)

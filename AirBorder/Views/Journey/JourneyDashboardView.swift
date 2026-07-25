@@ -416,7 +416,7 @@ struct JourneyDashboardView: View {
     private var layoverOverview: some View {
         SurfaceCard {
             VStack(alignment: .leading, spacing: 12) {
-                Label("Layover overview", systemImage: "checklist.checked")
+                Label("Your layover plan", systemImage: "checklist.checked")
                     .font(.headline)
                 if let candidate = viewModel.selectedCandidate,
                    let assessment = viewModel.selectedAssessment {
@@ -430,15 +430,10 @@ struct JourneyDashboardView: View {
                         FeasibilityPill(status: assessment.status)
                     }
                     Text(assessment.summary).font(.subheadline)
-                    if let probability = assessment.probability {
-                        Text("Chance this plan leaves enough time: \(percent(probability.estimate))")
-                            .font(.caption.monospacedDigit())
-                            .foregroundStyle(.secondary)
-                    }
                     NavigationLink {
                         CalculationTraceView(candidate: candidate, assessment: assessment)
                     } label: {
-                        Label("Why this recommendation?", systemImage: "info.circle")
+                        Label("Plan details", systemImage: "info.circle")
                             .frame(maxWidth: .infinity, minHeight: 44)
                     }
                     .buttonStyle(.bordered)
@@ -598,55 +593,18 @@ struct CalculationTraceView: View {
                 }
                 Text(assessment.summary).font(.subheadline)
             }
-            Section("What this plan means") {
-                LabeledContent("Time between flights", value: minutes(assessment.availableWindowMinutes))
-                LabeledContent("Time this plan may take", value: minutes(assessment.requiredMostLikelyMinutes))
-                LabeledContent("Time left to rest", value: minutes(assessment.usableRestMinutes))
-                LabeledContent("Be back by", value: assessment.latestReturnTime?.formatted(date: .abbreviated, time: .shortened) ?? "Waiting for more information")
-                if let probability = assessment.probability {
-                    LabeledContent("Chance of fitting the available time", value: percent(probability.estimate))
-                }
-            }
-            Section("Journey overview") {
-                Text("Get a quick, on-device overview of the timing in this plan.")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-                switch onDeviceExplanation.state {
-                case .idle:
-                    Button("Create overview") {
-                        Task { await onDeviceExplanation.summarize(assessment) }
-                    }
-                    .accessibilityIdentifier("onDeviceSummaryButton")
-                case .generating:
-                    HStack { ProgressView(); Text("Creating on-device summary…") }
-                case .available(let summary):
-                    Text(summary)
-                    Text("Check the latest flight and airport information before you go.")
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                case .unavailable(let message):
-                    Text(message).foregroundStyle(.secondary)
-                }
+            Section("Your timing") {
+                LabeledContent("Connection time", value: minutes(assessment.availableWindowMinutes))
+                LabeledContent("Plan time", value: minutes(assessment.requiredMostLikelyMinutes))
+                LabeledContent("Return by", value: assessment.latestReturnTime?.formatted(date: .abbreviated, time: .shortened) ?? "Check your flight details")
             }
             if !assessment.trace.unresolvedInputs.isEmpty {
                 Section("Before you go") {
                     Label("Check your latest arrival, boarding, and airport information before leaving the terminal.", systemImage: "questionmark.circle.fill")
                 }
             }
-            Section("What we included") {
-                ForEach(assessment.trace.steps) { step in
-                    VStack(alignment: .leading, spacing: 5) {
-                        Text(step.label).font(.headline)
-                        Text(step.result).font(.subheadline)
-                    }
-                    .padding(.vertical, 3)
-                }
-            }
-            Section("Last checked") {
-                Text(assessment.trace.generatedAt.formatted(date: .abbreviated, time: .standard))
-            }
         }
-        .navigationTitle("Why this plan?")
+        .navigationTitle("Plan details")
         .accessibilityIdentifier("calculationTraceView")
     }
 

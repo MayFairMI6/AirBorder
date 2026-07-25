@@ -77,11 +77,11 @@ struct TransitView: View {
     private func interAirportTransferCard(_ layover: LayoverContext) -> some View {
         SurfaceCard {
             VStack(alignment: .leading, spacing: 11) {
-                Label("Mandatory \(layover.airport.iata) → \(layover.onwardAirport.iata) transfer", systemImage: "arrow.left.arrow.right.circle.fill")
+                Label("Airport transfer", systemImage: "arrow.left.arrow.right.circle.fill")
                     .font(.title3.bold())
                     .foregroundStyle(.orange)
-                if let metro = layover.airportChangeAssessment.metroArea {
-                    LabeledContent("Airport change", value: "\(metro.name) · \(metro.airportCodes.sorted().joined(separator: ", "))")
+                if layover.airportChangeAssessment.metroArea != nil {
+                    LabeledContent("Your route", value: "\(layover.airport.iata) → \(layover.onwardAirport.iata)")
                         .font(.caption)
                 } else {
                     Text("This connection uses two airports. Plan time to travel between them.")
@@ -98,7 +98,7 @@ struct TransitView: View {
                                 Text(transferOptionHeading(plan: plan, selected: selected))
                                     .font(.caption.weight(.bold)).foregroundStyle(.teal)
                                 Text(selected.title).font(.headline)
-                                Text(selected.duration.map { "\(Int($0.value.mostLikely.rounded())) min most likely · \(Int($0.value.lower.rounded()))–\(Int($0.value.upper.rounded())) min range" } ?? "Duration unknown")
+                                Text(selected.duration.map { "About \(Int($0.value.mostLikely.rounded())) min" } ?? "Travel time unavailable")
                                     .font(.caption.monospacedDigit()).foregroundStyle(.secondary)
                             }
                             Spacer()
@@ -111,11 +111,11 @@ struct TransitView: View {
                             color: .orange
                         )
                     }
-                    DisclosureGroup("Compare transfer options") {
+                    DisclosureGroup("Other ways to travel") {
                         ForEach(plan.ranked) { option in
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(option.title).font(.subheadline.weight(.semibold))
-                                Text(option.duration.map { "\(Int($0.value.lower.rounded()))–\(Int($0.value.upper.rounded())) min · most likely \(Int($0.value.mostLikely.rounded())) · \(option.transfers.map(String.init) ?? "Transfers unknown") transfers" } ?? "Current duration unavailable")
+                                Text(option.duration.map { "About \(Int($0.value.mostLikely.rounded())) min" } ?? "Travel time unavailable")
                                     .font(.caption).foregroundStyle(.secondary)
                                 Text(option.luggageNotes).font(.caption2).foregroundStyle(.secondary)
                             }
@@ -203,7 +203,7 @@ struct TransitView: View {
     @ViewBuilder
     private func arrivalTarget(_ layover: LayoverContext) -> some View {
         VStack(alignment: .leading, spacing: 7) {
-            Text("ARRIVE AT \(layover.onwardAirport.iata) FIRST")
+            Text("NEXT AIRPORT")
                 .font(.caption.weight(.bold))
                 .foregroundStyle(.orange)
             if let target = viewModel.interAirportArrivalTarget {
@@ -221,7 +221,7 @@ struct TransitView: View {
                         .font(.headline)
                         .foregroundStyle(.orange)
                     if let gateClose = target.gateClose {
-                        Text("Known outer bound: onward gate closes \(localTime(gateClose, timeZoneIdentifier: target.timeZoneIdentifier)). This is not an airport-arrival target.")
+                        Text("Your next gate closes at \(localTime(gateClose, timeZoneIdentifier: target.timeZoneIdentifier)).")
                             .font(.subheadline)
                     }
                     Text("We don't have enough information to set a return time yet.")
@@ -349,24 +349,16 @@ struct TransitView: View {
     private func decisionMetrics(candidate: PlanCandidate, assessment: FeasibilityAssessment) -> some View {
         let decision = DecisionReadyPlan(candidate: candidate)
         return VStack(alignment: .leading, spacing: 5) {
-            Text("DECISION READY")
+            Text("PLAN AT A GLANCE")
                 .font(.caption.bold()).foregroundStyle(.teal)
             if let total = decision.totalMinutes {
-                LabeledContent("Total commitment", value: "\(total) min")
+                LabeledContent("Time away from the gate", value: "\(total) min")
             }
-            if let walk = decision.walkMinutes { LabeledContent("Walking", value: "\(walk) min") }
-            if let queue = decision.queueMinutes { LabeledContent("Queues / re-entry", value: "\(queue) min") }
-            if let backtracking = decision.backtrackingMinutes, backtracking > 0 {
-                LabeledContent("Backtracking", value: "\(backtracking) min")
-            }
-            Text(decision.accessMessage).font(.caption.weight(.semibold)).foregroundStyle(.secondary)
+            if let walk = decision.walkMinutes { LabeledContent("Walking time", value: "\(walk) min") }
             if let score = decision.quietCallScore {
-                Label("Quiet-call suitability: \(score)/10", systemImage: "video.fill")
+                Label(score >= 7 ? "Good for a quiet call" : "May be busy", systemImage: "video.fill")
                     .font(.caption.weight(.semibold))
             }
-            Text(assessment.status == .safe ? "SAFE for the current plan" : "RISK: \(assessment.status.title)")
-                .font(.caption.bold())
-                .foregroundStyle(assessment.status == .safe ? .green : .orange)
         }
         .padding(10)
         .background(Color.teal.opacity(0.08), in: RoundedRectangle(cornerRadius: 12))
