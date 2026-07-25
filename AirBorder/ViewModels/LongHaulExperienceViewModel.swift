@@ -241,6 +241,7 @@ final class LongHaulExperienceViewModel: ObservableObject {
             travelerProfile.walkingPace = qaWalkingPace
         }
         let cached = await cache.loadItinerary()
+        let cachedTicket = await cache.loadTicketScanResult()
         switch launchContext.mode {
         case .demo, .stochastic:
             itinerary = launchContext.scenario == "interAirport"
@@ -248,8 +249,10 @@ final class LongHaulExperienceViewModel: ObservableObject {
                 : LongHaulReferenceScenario.itinerary(anchor: fixtureAnchor())
         case .offline:
             itinerary = cached
+            ticketScanResult = cachedTicket
         case .live:
             itinerary = cached
+            ticketScanResult = cachedTicket
         }
         updateFreshness()
         await rebuildContext()
@@ -506,6 +509,7 @@ final class LongHaulExperienceViewModel: ObservableObject {
         ticketScanResult = nil
         ticketConnectionStatuses = []
         ticketScanMessage = nil
+        Task { try? await cache.saveTicketScanResult(nil) }
     }
 
     func confirmOfficialEntryReview(_ confirmed: Bool) async {
@@ -645,6 +649,7 @@ final class LongHaulExperienceViewModel: ObservableObject {
 
     private func persistAndRebuild() async {
         try? await cache.saveItinerary(itinerary)
+        try? await cache.saveTicketScanResult(ticketScanResult)
         updateFreshness()
         await rebuildContext()
     }

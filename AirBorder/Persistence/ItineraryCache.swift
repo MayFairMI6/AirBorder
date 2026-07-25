@@ -3,6 +3,8 @@ import Foundation
 protocol ItineraryCaching: Sendable {
     func loadItinerary() async -> Itinerary?
     func saveItinerary(_ itinerary: Itinerary?) async throws
+    func loadTicketScanResult() async -> TicketPDFScanResult?
+    func saveTicketScanResult(_ result: TicketPDFScanResult?) async throws
     func loadTravelerProfile() async -> TravelerProfile
     func saveTravelerProfile(_ profile: TravelerProfile) async throws
     func clearLongHaulData() async throws
@@ -13,6 +15,7 @@ private struct LongHaulCacheSnapshot: Codable {
     var providerPolicyVersion = ProviderPolicyRegistry.version
     var predictionModelVersion = 2
     var itinerary: Itinerary?
+    var ticketScanResult: TicketPDFScanResult?
     var travelerProfile = TravelerProfile.incomplete
 }
 
@@ -48,6 +51,13 @@ actor ItineraryCache: ItineraryCaching {
         snapshot.itinerary = itinerary
         snapshot.schemaVersion = Itinerary.currentSchemaVersion
         snapshot.providerPolicyVersion = ProviderPolicyRegistry.version
+        try Self.persist(snapshot, to: fileURL)
+    }
+
+    func loadTicketScanResult() async -> TicketPDFScanResult? { snapshot.ticketScanResult }
+
+    func saveTicketScanResult(_ result: TicketPDFScanResult?) async throws {
+        snapshot.ticketScanResult = result
         try Self.persist(snapshot, to: fileURL)
     }
 

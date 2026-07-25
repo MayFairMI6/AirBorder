@@ -454,7 +454,7 @@ final class LongHaulExpansionTests: XCTestCase {
             anchor: anchor
         )
         let visit = try XCTUnwrap(candidates.first { $0.title.contains("nearby visit") })
-        let transferIndex = try XCTUnwrap(visit.segments.firstIndex { $0.title == "Inter-airport transfer" })
+        let transferIndex = try XCTUnwrap(visit.segments.firstIndex { $0.kind == .outboundTravel })
         let activityIndex = try XCTUnwrap(visit.segments.firstIndex { $0.kind == .activity })
 
         XCTAssertLessThan(transferIndex, activityIndex)
@@ -691,6 +691,25 @@ final class LongHaulExpansionTests: XCTestCase {
         let persistedProfile = await reloaded.loadTravelerProfile()
         XCTAssertEqual(persistedItinerary?.legs.first?.flight.id, legacyJourney.flight.id)
         XCTAssertEqual(persistedProfile, profile)
+    }
+
+    func testTicketScanPersistsWithTheSavedItinerary() async throws {
+        let directory = try makeTemporaryDirectory()
+        defer { try? FileManager.default.removeItem(at: directory) }
+
+        let scan = try TicketPDFScanService.scanText(
+            "ROUTE BKK HND NRT LAX\nSELF TRANSFER\nCOLLECT BAG AT HND AND RECHECK",
+            fileName: "saved-ticket.txt",
+            at: anchor
+        )
+        let cache = ItineraryCache(directory: directory)
+        try await cache.saveTicketScanResult(scan)
+
+        let reloaded = ItineraryCache(directory: directory)
+        let saved = await reloaded.loadTicketScanResult()
+        XCTAssertEqual(saved?.sourceRecordID, scan.sourceRecordID)
+        XCTAssertTrue(saved?.baggageSignals.contains(.selfTransfer) == true)
+        XCTAssertTrue(saved?.baggageSignals.contains(.collectAndRecheck) == true)
     }
 
     func testProviderPolicyAllowsTrainingOnlyOnUserOwnedOutcomes() throws {
