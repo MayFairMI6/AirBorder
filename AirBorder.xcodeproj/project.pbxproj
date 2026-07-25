@@ -40,6 +40,7 @@
 		357C38F3FCB1E1D1F81B71F1 /* MapKitNearbyPlaceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD2A24F3811ABFA3CBB3C66 /* MapKitNearbyPlaceProvider.swift */; };
 		39E6AD51B054F314ED6DE5DC /* ConnectionRiskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67FFFF56F5A899EDA97C5CA /* ConnectionRiskService.swift */; };
 		3B63FEBFC75A65D9B06B7D76 /* ItineraryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FDBB5452CF5E1D55DA4BA8 /* ItineraryModels.swift */; };
+		3CE173555EBAB924A94EFA9A /* AirportDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF190E2D886AF4DB5D49E02F /* AirportDirectory.swift */; };
 		4092CA767A9AB0B152018D7B /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BED434D5B02E78A46D86FC /* NetworkMonitor.swift */; };
 		42BFAD75639A4880064BBC76 /* JourneyDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CAF4AD441AD312D3B2FE24 /* JourneyDashboardView.swift */; };
 		475CDCDBEDE124B62878F53B /* InterfaceComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57317DBF202F03195A1C3AE9 /* InterfaceComponents.swift */; };
@@ -240,6 +241,7 @@
 		BD9065797831C733908FF953 /* RecommendationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationModels.swift; sourceTree = "<group>"; };
 		BDF1AD0C7F197466A02DBC95 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		BDFA54DABE68285967198F4B /* RiskAndRoutingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskAndRoutingTests.swift; sourceTree = "<group>"; };
+		BF190E2D886AF4DB5D49E02F /* AirportDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportDirectory.swift; sourceTree = "<group>"; };
 		C5E7C30DD8F481EA269F61DD /* MetroAirportDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetroAirportDatabase.swift; sourceTree = "<group>"; };
 		C98EE0AFED1F76A2985B3240 /* ItineraryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItineraryCache.swift; sourceTree = "<group>"; };
 		CC5FFF07CFF4E002E049C025 /* LiveFlightService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveFlightService.swift; sourceTree = "<group>"; };
@@ -612,6 +614,7 @@
 		D1F706435138DEA61C9DB61F /* LongHaul */ = {
 			isa = PBXGroup;
 			children = (
+				BF190E2D886AF4DB5D49E02F /* AirportDirectory.swift */,
 				45F819E30126A1CF285B9671 /* CityTransferPracticeMapConfiguration.swift */,
 				629F89037F92F72FAA3AE814 /* FlightOperationalReferenceFixtures.swift */,
 				B8789B2E5C9A8C077C28BD08 /* FrankfurterCurrencyRateProvider.swift */,
@@ -805,6 +808,7 @@
 				0FB556CDB002A15AE4949CC3 /* ARViewContainer.swift in Sources */,
 				6DA8445D05DCB9DEC69232C3 /* AccessibilityPreferences.swift in Sources */,
 				339E3E4B0FAFA8E85E34E4E1 /* AffordabilityModels.swift in Sources */,
+				3CE173555EBAB924A94EFA9A /* AirportDirectory.swift in Sources */,
 				939A268A4E1F04887372274F /* AirportXRCompanionApp.swift in Sources */,
 				564783AD362F16A7F4D7CAB1 /* AppConfiguration.swift in Sources */,
 				621BCFA1E7BDF8CA603AEE7B /* AppContainer.swift in Sources */,

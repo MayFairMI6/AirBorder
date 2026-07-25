@@ -26,6 +26,7 @@ struct ARGuideView: View {
     @State private var externalReading: IndoorLocationReading?
     @State private var externalFeedStatus = "Waiting for indoor position"
     @State private var showsCityTransferGuide = false
+    @StateObject private var airportLocations = AirportLocationStore()
 
     var body: some View {
         Group {
@@ -149,15 +150,13 @@ struct ARGuideView: View {
     }
 
     private func cityTransferGuide(_ layover: LayoverContext) -> some View {
-        let configuration = CityTransferPracticeMapConfiguration.matching(
-            origin: layover.airport.iata,
-            destination: layover.onwardAirport.iata
-        )
+        let origin = airportLocations.locations[layover.airport.iata]
+        let destination = airportLocations.locations[layover.onwardAirport.iata]
         return ZStack(alignment: .bottom) {
-            if let configuration {
-                Map(initialPosition: .region(cityTransferRegion(for: configuration))) {
-                    Marker(layover.airport.iata, coordinate: configuration.originCoordinate).tint(.teal)
-                    Marker(layover.onwardAirport.iata, coordinate: configuration.destinationCoordinate).tint(.green)
+            if let origin, let destination {
+                Map(initialPosition: .region(cityTransferRegion(origin: origin, destination: destination))) {
+                    Marker(layover.airport.iata, coordinate: origin).tint(.teal)
+                    Marker(layover.onwardAirport.iata, coordinate: destination).tint(.green)
                 }
                 .ignoresSafeArea(edges: .bottom)
             } else {
@@ -191,7 +190,7 @@ struct ARGuideView: View {
                 }
 
                 Button {
-                    openTransferInMaps(layover, configuration: configuration)
+                    openTransferInMaps(layover, destination: destination)
                 } label: {
                     Label("Navigate in Apple Maps", systemImage: "arrow.triangle.turn.up.right.diamond.fill")
                         .frame(maxWidth: .infinity, minHeight: 48)
@@ -211,21 +210,26 @@ struct ARGuideView: View {
             .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 22))
             .padding()
         }
+        .task(id: "\(layover.airport.iata)-\(layover.onwardAirport.iata)") {
+            await airportLocations.resolve([layover.airport.iata, layover.onwardAirport.iata])
+        }
         .accessibilityIdentifier("arCityTransferGuide")
     }
 
-    private func cityTransferRegion(for configuration: CityTransferPracticeMapConfiguration) -> MKCoordinateRegion {
-        MKCoordinateRegion(
-            center: configuration.center,
-            span: MKCoordinateSpan(latitudeDelta: configuration.latitudeDelta, longitudeDelta: configuration.longitudeDelta)
+    private func cityTransferRegion(origin: CLLocationCoordinate2D, destination: CLLocationCoordinate2D) -> MKCoordinateRegion {
+        let latitudeDelta = max(abs(origin.latitude - destination.latitude) * 1.7, 0.08)
+        let longitudeDelta = max(abs(origin.longitude - destination.longitude) * 1.7, 0.08)
+        return MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: (origin.latitude + destination.latitude) / 2, longitude: (origin.longitude + destination.longitude) / 2),
+            span: MKCoordinateSpan(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta)
         )
     }
 
-    private func openTransferInMaps(_ layover: LayoverContext, configuration: CityTransferPracticeMapConfiguration?) {
-        guard let configuration else { return }
-        let destination = MKMapItem(placemark: MKPlacemark(coordinate: configuration.destinationCoordinate))
-        destination.name = "\(layover.onwardAirport.iata) Airport"
-        destination.openInMaps(launchOptions: [
+    private func openTransferInMaps(_ layover: LayoverContext, destination: CLLocationCoordinate2D?) {
+        guard let destination else { return }
+        let item = MKMapItem(placemark: MKPlacemark(coordinate: destination))
+        item.name = "\(layover.onwardAirport.iata) Airport"
+        item.openInMaps(launchOptions: [
             MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeTransit
         ])
     }

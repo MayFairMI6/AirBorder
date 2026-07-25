@@ -447,8 +447,9 @@ final class LongHaulExperienceViewModel: ObservableObject {
             ticketScanMessage = "We need at least two airport codes to add a route."
             return
         }
-        let airports = scan.routeAirportCodes.map { code in
-            Airport(iata: code, icao: nil, name: code, city: nil, timeZone: nil)
+        var airports: [Airport] = []
+        for code in scan.routeAirportCodes {
+            airports.append((await AirportDirectory.resolve(code)).airport)
         }
         // A ticket can list an airport change between two flown legs (for
         // example BKK → HND → NRT → LAX with two flight numbers). Keep that

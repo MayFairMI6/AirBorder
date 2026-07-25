@@ -656,6 +656,14 @@ final class FlightOperationalIntelligenceTests: XCTestCase {
         XCTAssertEqual(statuses.first?.transferFlow, .standardConnection)
     }
 
+    func testAirportDirectoryKeepsBundledAirportResolutionAvailable() async {
+        let resolved = await AirportDirectory.resolve("NRT")
+
+        XCTAssertEqual(resolved.airport.iata, "NRT")
+        XCTAssertEqual(resolved.airport.timeZone, "Asia/Tokyo")
+        XCTAssertNotNil(resolved.coordinate)
+    }
+
     func testTicketScanBuildsRecheckStatusForInterAirportConnection() throws {
         let itinerary = LongHaulReferenceScenario.hanedaToNaritaItinerary(anchor: now)
         let scan = try TicketPDFScanService.scanText(

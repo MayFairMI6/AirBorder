@@ -73,7 +73,7 @@ struct TicketPDFScanService: Sendable {
             let candidate = String(uppercased[range])
             // A ticket route normally lists airport codes in sequence. Keep
             // codes that occur around travel language as well as known points.
-            guard !["THE", "AND", "FOR", "BAG", "TKT", "PNR"].contains(candidate), !seen.contains(candidate) else { continue }
+            guard !["THE", "AND", "FOR", "BAG", "TAG", "TKT", "PNR"].contains(candidate), !seen.contains(candidate) else { continue }
             ordered.append(candidate)
             seen.insert(candidate)
         }
