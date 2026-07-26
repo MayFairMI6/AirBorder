@@ -1,4 +1,4 @@
-{"kind":"deck","id":"pr/b3l8eq","name":"Deck"}
+{"kind":"deck","id":"pr/xol02j","name":"Deck"}
 {"kind":"layout","layoutId":"/ppt/slideMasters/slideMaster1.xml","name":"Master","type":"master"}
 {"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout1.xml","name":"Title Slide","type":"title"}
 {"kind":"slide","id":"sl/y90nupkv","slide":1,"title":"AirBorder","textShapes":7}
@@ -211,54 +211,54 @@
 {"kind":"notes","id":"nt/m90b6t0r","slide":10,"text":""}
 {"kind":"slide","id":"sl/jetc3ut0","slide":11,"title":"AIRBORDER","textShapes":15}
 {"kind":"textbox","id":"sh/o7axk7m9","slide":11,"text":"AIRBORDER","textPreview":"AIRBORDER","textChars":9,"textLines":1,"bbox":[72,42,280,24]}
-{"kind":"textbox","id":"sh/xcryxg7y","slide":11,"text":"Architecture combines ticket parsing, airport data, and guidance","textPreview":"Architecture combines ticket parsing, airport data, and guidance","textChars":64,"textLines":1,"bbox":[72,76,980,52]}
+{"kind":"textbox","id":"sh/xcryxg7y","slide":11,"text":"Algorithms turn ticket facts into a connection plan","textPreview":"Algorithms turn ticket facts into a connection plan","textChars":51,"textLines":1,"bbox":[72,76,980,52]}
 {"kind":"shape","id":"sh/wbih4b6d","slide":11,"bbox":[72,142,1136,3]}
 {"kind":"shape","id":"sh/n69grmpw","slide":11,"bbox":[72,188,250,150]}
 {"kind":"shape","id":"sh/250zy18b","slide":11,"bbox":[72,188,7,150]}
 {"kind":"textbox","id":"sh/98rytw72","slide":11,"text":"Itinerary","textPreview":"Itinerary","textChars":9,"textLines":1,"bbox":[96,206,208,30]}
-{"kind":"textbox","id":"sh/o7ih0r6h","slide":11,"text":"Multi-leg flights, airport changes, transfer type, and baggage direction","textPreview":"Multi-leg flights, airport changes, transfer type, and baggage direction","textChars":72,"textLines":1,"bbox":[96,244,208,78]}
+{"kind":"textbox","id":"sh/o7ih0r6h","slide":11,"text":"Route, airport changes, transfer type, baggage direction, and boarding deadline","textPreview":"Route, airport changes, transfer type, baggage direction, and boarding deadline","textChars":79,"textLines":1,"bbox":[96,244,208,78]}
 {"kind":"shape","id":"sh/72t03qp0","slide":11,"bbox":[358,188,250,150]}
 {"kind":"shape","id":"sh/61kzalof","slide":11,"bbox":[358,188,7,150]}
 {"kind":"textbox","id":"sh/ofqtgnyt","slide":11,"text":"Traveler profile","textPreview":"Traveler profile","textChars":16,"textLines":1,"bbox":[382,206,208,30]}
-{"kind":"textbox","id":"sh/9gza9sze","slide":11,"text":"Nationality, documents, budget, fatigue, accessibility","textPreview":"Nationality, documents, budget, fatigue, accessibility","textChars":54,"textLines":1,"bbox":[382,244,208,78]}
+{"kind":"textbox","id":"sh/9gza9sze","slide":11,"text":"Walking preference, accessibility needs, budget, and traveller time buffer","textPreview":"Walking preference, accessibility needs, budget, and traveller time buffer","textChars":74,"textLines":1,"bbox":[382,244,208,78]}
 {"kind":"shape","id":"sh/mdobedg3","slide":11,"bbox":[644,188,250,150]}
 {"kind":"shape","id":"sh/nehs7iho","slide":11,"bbox":[644,188,7,150]}
 {"kind":"textbox","id":"sh/0b6tc3yx","slide":11,"text":"Provider proxy","textPreview":"Provider proxy","textChars":14,"textLines":1,"bbox":[668,206,208,30]}
-{"kind":"textbox","id":"sh/1cfa58zi","slide":11,"text":"Airport lookup, local search, maps, city transfer routes, weather, and places","textPreview":"Airport lookup, local search, maps, city transfer routes, weather, and places","textChars":77,"textLines":1,"bbox":[668,244,208,78]}
+{"kind":"textbox","id":"sh/1cfa58zi","slide":11,"text":"AirportDirectory, MapKit search, time-dependent routes, weather, and places","textPreview":"AirportDirectory, MapKit search, time-dependent routes, weather, and places","textChars":75,"textLines":1,"bbox":[668,244,208,78]}
 {"kind":"shape","id":"sh/epobatgr","slide":11,"bbox":[930,188,250,150]}
 {"kind":"shape","id":"sh/zaxs3yhc","slide":11,"bbox":[930,188,7,150]}
 {"kind":"textbox","id":"sh/cn6t83y1","slide":11,"text":"On-device cache","textPreview":"On-device cache","textChars":15,"textLines":1,"bbox":[954,206,208,30]}
-{"kind":"textbox","id":"sh/dofa18z6","slide":11,"text":"Saved tickets, offline fixtures, and personal preferences","textPreview":"Saved tickets, offline fixtures, and personal preferences","textChars":57,"textLines":1,"bbox":[954,244,208,78]}
+{"kind":"textbox","id":"sh/dofa18z6","slide":11,"text":"Saved tickets, offline fixtures, personal preferences, and timing observations","textPreview":"Saved tickets, offline fixtures, personal preferences, and timing observations","textChars":78,"textLines":1,"bbox":[954,244,208,78]}
 {"kind":"shape","id":"sh/tsnip0ny","slide":11,"bbox":[190,428,180,86]}
-{"kind":"textbox","id":"sh/87ehgv6d","slide":11,"text":"Build context","textPreview":"Build context","textChars":13,"textLines":1,"bbox":[206,446,148,58]}
+{"kind":"textbox","id":"sh/87ehgv6d","slide":11,"text":"Parse ticket","textPreview":"Parse ticket","textChars":12,"textLines":1,"bbox":[206,446,148,58]}
 {"kind":"shape","id":"sh/7650nq5s","slide":11,"bbox":[384,471,30,0]}
 {"kind":"shape","id":"sh/65wzelo7","slide":11,"bbox":[428,428,180,86]}
-{"kind":"textbox","id":"sh/l43ilgn2","slide":11,"text":"Compare plans","textPreview":"Compare plans","textChars":13,"textLines":1,"bbox":[444,446,148,58]}
+{"kind":"textbox","id":"sh/l43ilgn2","slide":11,"text":"Estimate time","textPreview":"Estimate time","textChars":13,"textLines":1,"bbox":[444,446,148,58]}
 {"kind":"shape","id":"sh/k3uhcb6h","slide":11,"bbox":[622,471,30,0]}
 {"kind":"shape","id":"sh/j2lgjq5w","slide":11,"bbox":[666,428,180,86]}
-{"kind":"textbox","id":"sh/y1czalob","slide":11,"text":"Route user","textPreview":"Route user","textChars":10,"textLines":1,"bbox":[682,446,148,58]}
+{"kind":"textbox","id":"sh/y1czalob","slide":11,"text":"Rank routes","textPreview":"Rank routes","textChars":11,"textLines":1,"bbox":[682,446,148,58]}
 {"kind":"shape","id":"sh/p07ixkn6","slide":11,"bbox":[860,471,30,0]}
 {"kind":"shape","id":"sh/4zyhofml","slide":11,"bbox":[904,428,180,86]}
-{"kind":"textbox","id":"sh/m58fih43","slide":11,"text":"Notify changes","textPreview":"Notify changes","textChars":14,"textLines":1,"bbox":[920,446,148,58]}
-{"kind":"textbox","id":"sh/n61wbmlo","slide":11,"text":"AirportDirectory resolves known airports from the bundled registry and expands coverage with MapKit search, so ticket-driven guidance can adapt beyond the Japan demo route.","textPreview":"AirportDirectory resolves known airports from the bundled registry and expands coverage with MapKit search, so ticket-driven guidance can...","textChars":172,"textLines":1,"bbox":[120,568,1040,56]}
+{"kind":"textbox","id":"sh/m58fih43","slide":11,"text":"Update plan","textPreview":"Update plan","textChars":11,"textLines":1,"bbox":[920,446,148,58]}
+{"kind":"textbox","id":"sh/n61wbmlo","slide":11,"text":"Connection slack: S = T(board) − [T(transfer) + T(bags) + T(entry) + T(security) + T(walk) + buffer]. A plan is feasible when S ≥ 0; route ranking minimises time, transfers, walking, and disruption.","textPreview":"Connection slack: S = T(board) − [T(transfer) + T(bags) + T(entry) + T(security) + T(walk) + buffer]. A plan is feasible when S ≥ 0; rout...","textChars":198,"textLines":1,"bbox":[120,568,1040,56]}
 {"kind":"notes","id":"nt/jetc3ut0","slide":11,"text":""}
 {"kind":"slide","id":"sl/8f2psfyx","slide":12,"title":"AIRBORDER","textShapes":8}
 {"kind":"textbox","id":"sh/0nap8f6l","slide":12,"text":"AIRBORDER","textPreview":"AIRBORDER","textChars":9,"textLines":1,"bbox":[72,42,280,24]}
-{"kind":"textbox","id":"sh/1gbm9s3a","slide":12,"text":"Build, demo, and validation are ready for review","textPreview":"Build, demo, and validation are ready for review","textChars":48,"textLines":1,"bbox":[72,76,980,52]}
+{"kind":"textbox","id":"sh/1gbm9s3a","slide":12,"text":"Validation and research pathway","textPreview":"Validation and research pathway","textChars":31,"textLines":1,"bbox":[72,76,980,52]}
 {"kind":"shape","id":"sh/0f2lgnmp","slide":12,"bbox":[72,142,1136,3]}
 {"kind":"shape","id":"sh/ra943il8","slide":12,"bbox":[70,174,325,478]}
 {"kind":"shape","id":"sh/dcbm583y","slide":12,"bbox":[452,188,620,118]}
 {"kind":"shape","id":"sh/sb2lcnmd","slide":12,"bbox":[452,188,7,118]}
 {"kind":"textbox","id":"sh/b6d4f2lc","slide":12,"text":"Launch commands","textPreview":"Launch commands","textChars":15,"textLines":1,"bbox":[476,206,578,30]}
-{"kind":"textbox","id":"sh/a543mx4r","slide":12,"text":"Simulator walkthrough · sample ticket import · AR preview · city map","textPreview":"Simulator walkthrough · sample ticket import · AR preview · city map","textChars":68,"textLines":1,"bbox":[476,244,578,46]}
+{"kind":"textbox","id":"sh/a543mx4r","slide":12,"text":"Ticket fixture · Simulator walkthrough · AR preview · city map","textPreview":"Ticket fixture · Simulator walkthrough · AR preview · city map","textChars":62,"textLines":1,"bbox":[476,244,578,46]}
 {"kind":"shape","id":"sh/wvupgz6t","slide":12,"bbox":[452,336,620,118]}
 {"kind":"shape","id":"sh/xw3q94ne","slide":12,"bbox":[452,336,7,118]}
 {"kind":"textbox","id":"sh/atc7epon","slide":12,"text":"Automated checks","textPreview":"Automated checks","textChars":16,"textLines":1,"bbox":[476,354,578,30]}
-{"kind":"textbox","id":"sh/bulo7u58","slide":12,"text":"106 automated tests passed. The ticket fixture verifies BKK → HND → NRT → LAX, baggage handling, and airport-transfer behavior.","textPreview":"106 automated tests passed. The ticket fixture verifies BKK → HND → NRT → LAX, baggage handling, and airport-transfer behavior.","textChars":127,"textLines":1,"bbox":[476,392,578,46]}
+{"kind":"textbox","id":"sh/bulo7u58","slide":12,"text":"106 automated tests passed. The fixture verifies BKK → HND → NRT → LAX, ticket-derived baggage handling, and airport-transfer behaviour.","textPreview":"106 automated tests passed. The fixture verifies BKK → HND → NRT → LAX, ticket-derived baggage handling, and airport-transfer behaviour.","textChars":136,"textLines":1,"bbox":[476,392,578,46]}
 {"kind":"shape","id":"sh/orapcf6h","slide":12,"bbox":[452,484,620,118]}
 {"kind":"shape","id":"sh/9sj65kn2","slide":12,"bbox":[452,484,7,118]}
 {"kind":"textbox","id":"sh/mps7a5or","slide":12,"text":"Next build priorities","textPreview":"Next build priorities","textChars":21,"textLines":1,"bbox":[476,502,578,30]}
-{"kind":"textbox","id":"sh/nq1o3a5w","slide":12,"text":"Use the GitHub build guide to run in Simulator or on a personal iPhone. Future work: live provider credentials, indoor map partnerships, and on-device AR testing.","textPreview":"Use the GitHub build guide to run in Simulator or on a personal iPhone. Future work: live provider credentials, indoor map partnerships, ...","textChars":162,"textLines":1,"bbox":[476,540,578,46]}
+{"kind":"textbox","id":"sh/nq1o3a5w","slide":12,"text":"Research next: model transfer components as probability distributions, estimate P(on time), calibrate against observed journeys, and optimise reliability, walking, cost, and accessibility together.","textPreview":"Research next: model transfer components as probability distributions, estimate P(on time), calibrate against observed journeys, and opti...","textChars":197,"textLines":1,"bbox":[476,540,578,46]}
 {"kind":"image","id":"im/uxknq14z","slide":12,"name":"","geometry":"roundRect","bbox":[127.17,184,210.66,458]}
 {"kind":"notes","id":"nt/8f2psfyx","slide":12,"text":""}
 {"kind":"slide","id":"sl/hgzapcr6","slide":13,"title":"AirBorder turns a stressful layover into a clear travel plan.","textShapes":3}
