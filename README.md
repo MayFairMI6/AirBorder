@@ -25,6 +25,10 @@ No configured credential-backed live-provider run is bundled. A `live` launch ne
 
 Keep at least 5 GB free before building. The scripts use only project-owned `build/` artifacts.
 
+## Download, build, and test
+
+Reviewers can clone the public repository, build AirBorder in Xcode, run it in Simulator, and install it on their own iPhone with a Personal Team—no TestFlight account is needed for that workflow. See [Build and Device Test](Documentation/Build-and-Device-Test.md) for the complete steps.
+
 ## Build and test from the terminal
 
 ```bash
@@ -137,6 +141,7 @@ Caching is provider-specific: versioned official/static registries may persist; 
 - Architecture: [Documentation/Architecture.md](Documentation/Architecture.md)
 - Data and licensing: [Documentation/DataSources.md](Documentation/DataSources.md)
 - Privacy/security: [Documentation/PrivacyAndSecurity.md](Documentation/PrivacyAndSecurity.md)
+- Local build and device test: [Documentation/Build-and-Device-Test.md](Documentation/Build-and-Device-Test.md)
 - Figma foundations: [editable Figma file](https://www.figma.com/design/MgNQlseRuiBCZvDjXnsvHi?node-id=3-31)
 
 Simulator results do not validate camera tracking. Physical-device AR remains a separate acceptance test.

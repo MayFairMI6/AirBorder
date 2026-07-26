@@ -62,7 +62,7 @@ struct FlightsView: View {
         }
         .fileImporter(
             isPresented: $isImportingTicketPDF,
-            allowedContentTypes: [.pdf, .image],
+            allowedContentTypes: [.pdf, .image, .plainText],
             allowsMultipleSelection: false
         ) { result in
             importTicketPDF(result)

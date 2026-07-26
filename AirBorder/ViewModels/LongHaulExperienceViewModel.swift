@@ -435,9 +435,16 @@ final class LongHaulExperienceViewModel: ObservableObject {
         defer { isScanningTicketPDF = false }
         do {
             let scanner = TicketPDFScanService()
-            let result = fileName.lowercased().hasSuffix(".pdf")
-                ? try scanner.scanPDF(data: data, fileName: fileName, at: now())
-                : try scanner.scanImage(data: data, fileName: fileName, at: now())
+            let lowercasedName = fileName.lowercased()
+            let result: TicketPDFScanResult
+            if lowercasedName.hasSuffix(".pdf") {
+                result = try scanner.scanPDF(data: data, fileName: fileName, at: now())
+            } else if lowercasedName.hasSuffix(".txt") {
+                let text = String(decoding: data, as: UTF8.self)
+                result = try TicketPDFScanService.scanText(text, fileName: fileName, at: now())
+            } else {
+                result = try scanner.scanImage(data: data, fileName: fileName, at: now())
+            }
             ticketScanResult = result
             await applyScannedTicketRoute()
         } catch {
