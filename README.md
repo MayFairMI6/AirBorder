@@ -1,8 +1,20 @@
-# Airport XR Companion
+# AirBorder — airport layover and transfer prototype
 
 Airport XR Companion is a native iPhone research prototype for long-haul international layovers, including same-airport planning and automatic multi-airport metro transfers such as HND to NRT.
 
 > Research prototype - simulated or research data.
+
+## Technical overview
+
+The problem is deciding which layover activities fit between an inbound arrival and an onward gate close when travel times and required steps are uncertain. Airport changes, stale provider data, accessibility needs, and missing entry information all affect that decision.
+
+This personal research prototype brings together the SwiftUI interface, provider-neutral data models, routing and recommendation services, on-device state, and a Cloudflare Worker proxy. The repository history and [development context](.codex/project-context.md) record its implementation. The project includes AI-assisted development workflows; the implemented code and tests define the scope presented here.
+
+The central design choice is to keep decision evidence explicit. Time estimates carry provenance and uncertainty; the recommendation engine uses seeded Monte Carlo sampling and a Wilson interval, while a separate policy layer decides whether the available evidence supports a recommendation. Indoor routing uses Pareto filtering and explicit ordering of route criteria. [Architecture](Documentation/Architecture.md) explains these boundaries.
+
+**Technologies:** Swift, SwiftUI, MapKit, Vision, ARKit, XCTest, JavaScript, Cloudflare Workers, and Node's test runner.
+
+**Evaluation and status:** the repository includes deterministic decision/routing tests, simulator UI tests, and Worker tests for authentication, input handling, provider behavior, and policy boundaries. The Worker suite passed 37/37 tests on September 30, 2026. The iOS build and simulator suites were not rerun for this documentation update. These test implementation behavior. Real-airport field performance, calibrated missed-flight probabilities, physical-device AR tracking, and passenger-study outcomes remain separate validation work. The later local HCI survey is not bundled in this repository.
 
 ## What is implemented
 
@@ -32,7 +44,8 @@ Reviewers can clone the public repository, build AirBorder in Xcode, run it in S
 ## Build and test from the terminal
 
 ```bash
-cd /Users/anony/Downloads/AirportXRCompanion
+git clone https://github.com/MayFairMI6/AirBorder.git
+cd AirBorder
 ./Scripts/generate.sh
 ./Scripts/build.sh
 ./Scripts/test.sh
