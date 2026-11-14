@@ -1,5 +1,13 @@
 # Project Context Ledger: AirportXRCompanion
 
+### November 13 native gate-change reproduction and repair
+
+On advisory review revision a03cd3b, a focused native XCTest run on iPhone 13 / iOS 27.0 passed 12 existing checks and reproduced one failure with three failed assertions. After confirming arrival at Gate 105 and receiving Gate 108A at 17:10, the store retained a complete checklist and its at-gate flag, so it produced the gate-change condition without the expected boarding-risk condition. Earlier steps retained their states. The original test and Xcode evidence are in /tmp/airborder-gate-regression.13HhV9.
+
+The local repair binds arrival confirmation to the full gate identifier, reopens the gate step and refreshes timing alerts after reassignment. Earlier checkpoints retain their state. Duplicate updates and reports without a gate preserve valid confirmation. A legacy gate checkmark with no saved identifier reopens on restore. The original regression and a new end-to-end simulator UI test both passed. The UI test saves arrival at 105, restarts the app to deliver the controlled 108A update, and checks the boarding warning, the countdown and the reopened tracker. The iPhone 13 / iOS 27.0 run passed 37 unit tests and five targeted UI tests without skips. Result bundle, screenshots and run log are in /tmp/airborder-gate-fixed.wx7jJm. The configured gpt-5.6 independent review could not run because the signed-in Codex account does not support it. Changes are local and unpushed.
+
+Based on the approved second Journey steps preview, the local native change gives the current row a Mark complete button, makes Skip this step available only at the current skippable checkpoint with a prompt to check with airport staff, and distinguishes a skipped checkpoint from a confirmed one with a dash and status. Undo restores the pending checkpoint. The iPhone 13 / iOS 27.0 run passed 34 unit tests and one tracker UI test. The independent ui_researcher source review found no blocking passenger-facing issues. Simulator screenshots, the review and the result bundle are in /tmp/airborder-tracker-fix.eBDpSC. Changes are local.
+
 ## Current handoff — HCI review and merge protection
 
 Updated November 8, 2026 (America/New_York). This checkpoint supersedes older **current status** statements below for the HCI browser/PR work. Historical native architecture and evidence remain available below; do not treat their dated build, disk-space, completion or workflow claims as current. Verify repository state and the exact PR head before acting.

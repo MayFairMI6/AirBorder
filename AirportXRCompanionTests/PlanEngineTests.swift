@@ -79,30 +79,34 @@ final class JourneyChecklistTests: XCTestCase {
         let checklist = JourneyChecklist.haneda
         XCTAssertEqual(checklist.current?.title, "Security")
         XCTAssertEqual(checklist.next?.title, "Passport control")
-        XCTAssertEqual(checklist.status(of: checklist.steps[2]), "Now")
-        XCTAssertEqual(checklist.status(of: checklist.steps[3]), "Next")
+        XCTAssertEqual(checklist.status(of: checklist.steps[2]), "Current step")
+        XCTAssertEqual(checklist.status(of: checklist.steps[3]), "Upcoming")
     }
 
+    // PROCEDURAL: verify that reaching a checkpoint gates its skip action and that Undo restores it.
     func testConfirmSkipAndUndo() {
         var checklist = JourneyChecklist.haneda
         XCTAssertFalse(checklist.canConfirm("passport"), "Only the current step can be confirmed")
+        XCTAssertFalse(checklist.canSkip("passport"), "An upcoming step cannot be skipped")
         checklist.skip("passport")
-        XCTAssertEqual(checklist.next?.title, "Gate and boarding")
-        checklist.undo()
         XCTAssertEqual(checklist.next?.title, "Passport control")
         checklist.confirm("security")
         XCTAssertEqual(checklist.current?.title, "Passport control")
         XCTAssertTrue(checklist.canUndo("security"))
+        XCTAssertTrue(checklist.canSkip("passport"))
+        checklist.skip("passport")
+        XCTAssertEqual(checklist.current?.title, "Gate and boarding")
+        XCTAssertEqual(checklist.status(of: checklist.steps[3]), "Skipped")
         checklist.undo()
-        XCTAssertEqual(checklist.current?.title, "Security")
-        XCTAssertFalse(checklist.canSkip("security"))
+        XCTAssertEqual(checklist.current?.title, "Passport control")
+        XCTAssertFalse(JourneyChecklist.narita.canSkip("passport"), "Passport control remains required for the airport transfer")
     }
 
     func testCompletes() {
         var checklist = JourneyChecklist.haneda
         checklist.confirm("security")
         checklist.skip("passport")
-        checklist.confirm("gate")
+        checklist.confirm("gate", departureGate: "105")
         XCTAssertTrue(checklist.isComplete)
         XCTAssertNil(checklist.current)
     }
@@ -260,8 +264,7 @@ final class JourneyConditionTests: XCTestCase {
 
 @MainActor
 final class JourneySituationStoreTests: XCTestCase {
-    private func makeStore() -> JourneyStore {
-        let defaults = UserDefaults(suiteName: "JourneySituationStoreTests-\(UUID().uuidString)")!
+    private func makeStore(defaults: UserDefaults = UserDefaults(suiteName: "JourneySituationStoreTests-\(UUID().uuidString)")!) -> JourneyStore {
         return JourneyStore(walkingData: FixedWalkingData(kmh: nil), defaults: defaults)
     }
 
@@ -277,6 +280,86 @@ final class JourneySituationStoreTests: XCTestCase {
         XCTAssertNil(store.alertToPresent, "The same update does not alert twice")
         store.acknowledge(.gateChange)
         XCTAssertEqual(store.alerts[.gateChange]?.acknowledged, true)
+    }
+
+    // PROCEDURAL: reproduce the stale gate confirmation with a controlled feed update.
+    func testDifferentGateReopensGateStepAndRestoresBoardingRisk() {
+        let store = makeStore()
+        let updateTime = ClockTime(17, 10)
+        store.confirmStep("security")
+        store.confirmStep("passport")
+        store.confirmStep("gate")
+        store.setNow(updateTime)
+
+        XCTAssertEqual(store.gate, "105")
+        XCTAssertTrue(store.checklist.isComplete)
+        XCTAssertTrue(store.conditionInputs.atGate)
+        XCTAssertFalse(store.hasTimingSituation)
+        let previousSteps = store.checklist.steps.dropLast()
+
+        store.receive(FlightFeed(gate: "108A", receivedAt: updateTime))
+
+        XCTAssertEqual(store.gate, "108A")
+        XCTAssertTrue(store.conditions.contains(.gateChanged(from: "105", to: "108A")))
+        XCTAssertEqual(store.checklist.steps.dropLast(), previousSteps)
+        XCTAssertEqual(store.checklist.current?.id, "gate", "The new gate needs its own confirmation")
+        XCTAssertFalse(store.conditionInputs.atGate, "Confirmation at 105 cannot confirm arrival at 108A")
+        XCTAssertEqual(store.primaryCondition, .boardingAtRisk(closesIn: 15, walk: 12))
+        XCTAssertEqual(store.alertToPresent, .boardingAtRisk)
+        XCTAssertFalse(store.checklist.canUndo("gate"))
+
+        store.confirmStep("gate")
+        XCTAssertTrue(store.checklist.isComplete)
+        XCTAssertTrue(store.conditionInputs.atGate)
+        XCTAssertFalse(store.hasTimingSituation)
+    }
+
+    func testSameGateAndMissingGatePreservePersistedConfirmation() {
+        let defaults = UserDefaults(suiteName: "JourneySituationStoreTests-\(UUID().uuidString)")!
+        let store = makeStore(defaults: defaults)
+        store.confirmStep("security")
+        store.skipStep("passport")
+        let update = FlightFeed(gate: "108A", receivedAt: ClockTime(12, 0))
+        store.receive(update)
+        store.confirmStep("gate")
+
+        let restored = makeStore(defaults: defaults)
+        XCTAssertTrue(restored.conditionInputs.atGate)
+        restored.receive(update)
+        restored.receive(FlightFeed(gate: nil, receivedAt: ClockTime(12, 10)))
+        XCTAssertEqual(restored.feed, update)
+        XCTAssertTrue(restored.checklist.isComplete)
+        XCTAssertTrue(restored.conditionInputs.atGate)
+
+        // An identifier with the same number and a different suffix is a different gate.
+        restored.receive(FlightFeed(gate: "108B", receivedAt: ClockTime(12, 15)))
+        XCTAssertEqual(restored.checklist.current?.id, "gate")
+        XCTAssertFalse(restored.conditionInputs.atGate)
+        XCTAssertEqual(restored.checklist.steps.first { $0.id == "passport" }?.state, .skipped)
+        XCTAssertEqual(makeStore(defaults: defaults).checklist.current?.id, "gate")
+    }
+
+    func testLegacyGateConfirmationReopensWhenRestored() throws {
+        let defaults = UserDefaults(suiteName: "JourneySituationStoreTests-\(UUID().uuidString)")!
+        let store = makeStore(defaults: defaults)
+        store.confirmStep("security")
+        store.skipStep("passport")
+        store.confirmStep("gate")
+
+        // Simulate a save from the previous version by removing the new gate field.
+        let key = "journeyState.v1"
+        let saved = try XCTUnwrap(defaults.data(forKey: key))
+        var state = try XCTUnwrap(JSONSerialization.jsonObject(with: saved) as? [String: Any])
+        var checklist = try XCTUnwrap(state["checklist"] as? [String: Any])
+        XCTAssertEqual(checklist.removeValue(forKey: "confirmedGate") as? String, "105")
+        state["checklist"] = checklist
+        defaults.set(try JSONSerialization.data(withJSONObject: state), forKey: key)
+
+        let restored = makeStore(defaults: defaults)
+        XCTAssertEqual(restored.checklist.current?.id, "gate")
+        XCTAssertEqual(restored.checklist.steps.dropLast(), store.checklist.steps.dropLast())
+        XCTAssertFalse(restored.conditionInputs.atGate)
+        XCTAssertFalse(restored.checklist.canUndo("gate"))
     }
 
     func testStopsMoveTheLeaveTimeForReturnNow() {

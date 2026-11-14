@@ -2,6 +2,10 @@
 
 `.github/workflows/ui-review-queue.yml` adds one comment to the open **UI review queue** issue (label `ui-review-queue`) for each pull-request commit whose **iOS CI** or **UI review** run failed. Codex or Claude handles each request in a local session. No AI calls run in CI.
 
+For substantive review of passenger-facing changes, including when tests pass,
+use [the advisory Codex design review](DESIGN-REVIEW.md). It is separate from
+this failure queue and does not change the merge checks.
+
 For each request:
 
 1. Read the failing run and its artifacts: iOS CI uploads `xcresult` with UI-test screenshots and audit failures, and the UI review job log lists missing evidence, copy tags or `Web/` changes.

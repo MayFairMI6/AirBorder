@@ -14,34 +14,45 @@ struct JourneyStepsView: View {
             GroupedList {
                 ForEach(Array(checklist.steps.enumerated()), id: \.element.id) { index, step in
                     if index > 0 { RowDivider() }
-                    row(step, number: index + 1)
+                    row(step, number: index + 1, checklist: checklist)
                 }
             }
         }
     }
 
-    private func row(_ step: JourneyStep, number: Int) -> some View {
-        let checklist = store.checklist
-        let isCurrent = checklist.current?.id == step.id
+    private func row(_ step: JourneyStep, number: Int, checklist: JourneyChecklist) -> some View {
+        let isCurrent = checklist.canConfirm(step.id)
         return HStack(spacing: 14) {
             StepMarker(state: step.state, number: number, isCurrent: isCurrent, size: 28)
-            VStack(alignment: .leading, spacing: 2) {
-                Text(step.title).outfitText(16, .semibold)
-                if step.state == .skipped {
-                    Text("Not needed").outfitText(13, .regular, AB.muted)
+            if checklist.canSkip(step.id) {
+                VStack(alignment: .leading, spacing: 10) {
+                    stepLabel(step, status: checklist.status(of: step))
+                    Text("Check with airport staff before skipping.")
+                        .outfitText(13, .regular, AB.muted)
+                        .fixedSize(horizontal: false, vertical: true)
+                    ViewThatFits(in: .horizontal) {
+                        HStack(spacing: 8) {
+                            completeButton(step)
+                            skipButton(step)
+                        }
+                        .fixedSize(horizontal: true, vertical: false)
+                        VStack(alignment: .leading, spacing: 8) {
+                            completeButton(step)
+                            skipButton(step)
+                        }
+                    }
                 }
-            }
-            .accessibilityElement(children: .combine)
-            .accessibilityValue(checklist.status(of: step))
-            Spacer(minLength: 8)
-            if checklist.canUndo(step.id) {
-                action("Undo", id: "undo-\(step.id)") { store.undoStep() }
+                .frame(maxWidth: .infinity, alignment: .leading)
             } else {
-                if checklist.canSkip(step.id) {
-                    action("Not needed", id: "skip-\(step.id)") { store.skipStep(step.id) }
-                }
-                if checklist.canConfirm(step.id) {
-                    action("Done", id: "confirm-\(step.id)") { store.confirmStep(step.id) }
+                stepLabel(step, status: checklist.status(of: step), showStatus: isCurrent || step.state == .skipped)
+                Spacer(minLength: 4)
+                if isCurrent {
+                    completeButton(step)
+                } else if checklist.canUndo(step.id) {
+                    CTAButton(title: "Undo", style: .plain, height: 44, fullWidth: false) {
+                        store.undoStep()
+                    }
+                    .accessibilityIdentifier("undo-\(step.id)")
                 }
             }
         }
@@ -50,18 +61,37 @@ struct JourneyStepsView: View {
         .background(isCurrent ? Color(hex: 0xFFF7DE) : .clear)
     }
 
-    private func action(_ title: String, id: String, perform: @escaping () -> Void) -> some View {
-        Button(action: perform) {
-            Text(title).outfitText(15, .semibold, AB.primary)
-                .padding(.horizontal, 8)
-                .padding(.vertical, 12)
+    private func stepLabel(_ step: JourneyStep, status: String, showStatus: Bool = false) -> some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(step.title).outfitText(16, .semibold)
+            if showStatus {
+                Text(status).outfitText(13, .regular, AB.muted)
+            }
         }
-        .buttonStyle(.plain)
-        .accessibilityIdentifier(id)
+        .fixedSize(horizontal: false, vertical: true)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(step.title)
+        .accessibilityValue(status)
+        .accessibilityIdentifier("journey-step-\(step.id)")
+    }
+
+    private func completeButton(_ step: JourneyStep) -> some View {
+        CTAButton(title: "Mark complete", height: 44, fullWidth: false) {
+            store.confirmStep(step.id)
+        }
+        .accessibilityIdentifier("confirm-\(step.id)")
+    }
+
+    private func skipButton(_ step: JourneyStep) -> some View {
+        CTAButton(title: "Skip this step", style: .outline, height: 44, fullWidth: false) {
+            store.skipStep(step.id)
+        }
+        .accessibilityHint("Check with airport staff before skipping.")
+        .accessibilityIdentifier("skip-\(step.id)")
     }
 }
 
-/// Navy tick for done or not-needed steps, yellow number for the current step, grey for upcoming.
+/// A checkmark records confirmation and a dash records a traveller-selected skip.
 struct StepMarker: View {
     let state: StepState
     let number: Int
@@ -69,13 +99,21 @@ struct StepMarker: View {
     let size: CGFloat
 
     var body: some View {
-        let done = state != .pending
+        let confirmed = state == .confirmed
         let side = isCurrent ? max(size, 28) : size
-        Text(done ? "✓" : "\(number)")
-            .outfitText(isCurrent ? 13 : 12, done ? .semibold : .bold, done ? .white : (isCurrent ? AB.gateText : AB.primary))
+        Text(symbol)
+            .outfitText(isCurrent ? 13 : 12, isCurrent ? .semibold : .bold, confirmed ? .white : (isCurrent ? AB.gateText : AB.primary))
             .frame(width: side, height: side)
-            .background(done ? AB.primary : (isCurrent ? AB.gateYellow : AB.chip), in: Circle())
+            .background(confirmed ? AB.primary : (isCurrent ? AB.gateYellow : AB.chip), in: Circle())
             .accessibilityHidden(true)
+    }
+
+    private var symbol: String {
+        switch state {
+        case .confirmed: "✓"
+        case .skipped: "–"
+        case .pending: "\(number)"
+        }
     }
 }
 
@@ -116,7 +154,10 @@ struct JourneyProgressStrip: View {
     }
 
     private var accessibilityText: String {
-        guard let index = checklist.currentIndex else { return "All steps done" }
-        return "Step \(index + 1) of \(checklist.steps.count), \(checklist.steps[index].title)"
+        let progress = checklist.currentIndex.map { index in
+            "Step \(index + 1) of \(checklist.steps.count), \(checklist.steps[index].title)"
+        } ?? "All steps done"
+        let skipped = checklist.steps.filter { $0.state == .skipped }.map(\.title)
+        return skipped.isEmpty ? progress : "\(progress). Skipped: \(skipped.joined(separator: ", "))"
     }
 }

@@ -86,6 +86,13 @@ Claude in Claude Code. It is advisory and makes no AI calls in CI.
 
 ## Review guidelines
 
+- For PRs that change a passenger-facing flow, Codex also applies
+  [the advisory design review](.github/ui-review/DESIGN-REVIEW.md) even when
+  CI passes. Flag a tested design that could still mislead a traveler. Name
+  the observed screen or source, plausible consequence, concrete revision,
+  and verification. Label missing evidence and distinguish a predicted
+  misunderstanding from an observed user outcome.
+
 Report rubric and consistency review is **Claude's job, run in Claude Code** (no API keys in
 CI). Merged changes are queued on the `report-review-queue` issue by
 `.github/workflows/report-review-queue.yml`, and Claude handles them by following

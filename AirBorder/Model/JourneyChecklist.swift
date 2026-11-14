@@ -7,7 +7,7 @@ enum StepState: String, Codable {
 struct JourneyStep: Identifiable, Codable, Equatable {
     let id: String
     let title: String
-    /// Steps that may not apply to every traveller offer "Not needed".
+    /// A traveller can skip an applicable checklist row only when it becomes current.
     let canSkip: Bool
     var state: StepState = .pending
 
@@ -23,11 +23,12 @@ struct JourneyStep: Identifiable, Codable, Equatable {
 
 /// Departure-to-arrival checkpoints for the Haneda connection.
 ///
-/// "Now" is the first step the traveller has not confirmed or marked not needed. It is never
-/// inferred from location.
+/// The current step is the first pending checkpoint.
 struct JourneyChecklist: Codable, Equatable {
     var steps: [JourneyStep]
     private(set) var lastChange: Change?
+    /// Saved with the checklist so a confirmation always identifies the full departure gate.
+    private(set) var confirmedGate: String? = nil
 
     struct Change: Codable, Equatable {
         let stepID: String
@@ -65,15 +66,26 @@ struct JourneyChecklist: Codable, Equatable {
     func canConfirm(_ id: String) -> Bool { current?.id == id }
 
     func canSkip(_ id: String) -> Bool {
-        guard let step = steps.first(where: { $0.id == id }) else { return false }
-        return step.canSkip && step.state == .pending
+        current?.id == id && current?.canSkip == true
     }
 
     func canUndo(_ id: String) -> Bool { lastChange?.stepID == id }
 
-    mutating func confirm(_ id: String) {
+    mutating func confirm(_ id: String, departureGate: String? = nil) {
         guard canConfirm(id) else { return }
+        if id == "gate" {
+            guard let departureGate, !departureGate.isEmpty else { return }
+            confirmedGate = departureGate
+        }
         set(id, .confirmed)
+    }
+
+    mutating func reconcileGate(_ departureGate: String) {
+        guard let index = steps.firstIndex(where: { $0.id == "gate" && $0.state == .confirmed }),
+              confirmedGate == nil || confirmedGate != departureGate else { return }
+        steps[index].state = .pending
+        confirmedGate = nil
+        if lastChange?.stepID == "gate" { lastChange = nil }
     }
 
     mutating func skip(_ id: String) {
@@ -84,6 +96,7 @@ struct JourneyChecklist: Codable, Equatable {
     mutating func undo() {
         guard let change = lastChange, let index = steps.firstIndex(where: { $0.id == change.stepID }) else { return }
         steps[index].state = change.previous
+        if change.stepID == "gate" { confirmedGate = nil }
         lastChange = nil
     }
 
@@ -96,8 +109,8 @@ struct JourneyChecklist: Codable, Equatable {
     func status(of step: JourneyStep) -> String {
         switch step.state {
         case .confirmed: return "Confirmed"
-        case .skipped: return "Not needed"
-        case .pending: return step.id == current?.id ? "Now" : "Next"
+        case .skipped: return "Skipped"
+        case .pending: return step.id == current?.id ? "Current step" : "Upcoming"
         }
     }
 }

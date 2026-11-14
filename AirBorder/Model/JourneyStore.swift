@@ -126,6 +126,13 @@ final class JourneyStore: ObservableObject {
         feed = saved?.feed
         alerts = saved?.alerts ?? [:]
         routeChoice = (saved?.stepFreeRoutes ?? false) ? .stepFree : .direct
+        var restoredChecklist = checklist
+        restoredChecklist.reconcileGate(gate)
+        if restoredChecklist != checklist {
+            // Previous saves may contain a gate checkmark with no gate identifier.
+            checklist = restoredChecklist
+            clearGateTimingAlerts()
+        }
         refreshSuggestion()
     }
 
@@ -156,7 +163,7 @@ final class JourneyStore: ObservableObject {
             gateCloses: outbound.gateCloses,
             walkToGate: gateWalkMinutes,
             leaveBy: leave,
-            atGate: checklist.steps.first { $0.id == "gate" }?.state == .confirmed,
+            atGate: checklist.confirmedGate == gate,
             departsFromAnotherAirport: isAirportTransfer
         )
     }
@@ -184,8 +191,19 @@ final class JourneyStore: ObservableObject {
 
     /// A departure-flight report arrived from the feed.
     func receive(_ report: FlightFeed) {
+        // A report without a gate leaves the last known gate and its observation time intact.
+        guard let reportedGate = report.gate, !reportedGate.isEmpty else { return }
+        if reportedGate != gate {
+            checklist.reconcileGate(reportedGate)
+            clearGateTimingAlerts()
+        }
         feed = report
         refreshAlerts()
+    }
+
+    private func clearGateTimingAlerts() {
+        alerts.removeValue(forKey: .returnNow)
+        alerts.removeValue(forKey: .boardingAtRisk)
     }
 
     /// The sample journey's gate update: Gate 108A, reported a short while after the app opens.
@@ -334,7 +352,7 @@ final class JourneyStore: ObservableObject {
 
     // MARK: Journey steps
 
-    func confirmStep(_ id: String) { checklist.confirm(id); refreshAlerts() }
+    func confirmStep(_ id: String) { checklist.confirm(id, departureGate: gate); refreshAlerts() }
     func skipStep(_ id: String) { checklist.skip(id) }
     func undoStep() { checklist.undo() }
 
