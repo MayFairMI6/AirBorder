@@ -1,5 +1,17 @@
 # Project Context Ledger: AirportXRCompanion
 
+## November 13 — standalone indoor replay on the rebuilt iOS app
+
+Started from main `404ade3` after app PR #1 merged. The rebuilt Swift app had
+no consumer for the existing HTTP replay flag. Added a Debug Simulator-only
+loopback client for the scripted Haneda Gate 105 route, plus standalone driver
+HTTP checks and an XCUITest that asserts the live route card responds to replay
+and reset without manual advancement. iOS CI runs the two new layers separately
+while retaining the original unit and UI tests. The standalone checks (2/2)
+and the focused driver-to-app test (1/1, iPhone 18 Pro simulator, iOS 27.0,
+Xcode 27.1) passed locally. This covers scripted floor/landmark labels and their
+handoff, not physical tracking, Core Location injection, or a surveyed terminal.
+
 ## Current handoff — HCI review and merge protection
 
 Updated November 8, 2026 (America/New_York). This checkpoint supersedes older **current status** statements below for the HCI browser/PR work. Historical native architecture and evidence remain available below; do not treat their dated build, disk-space, completion or workflow claims as current. Verify repository state and the exact PR head before acting.

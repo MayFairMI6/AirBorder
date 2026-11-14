@@ -569,7 +569,11 @@ npx wrangler deploy --dry-run
 
 Tests mock upstream services and AI. They validate schemas, auth/rate boundaries, fallback, entry-chain safety, Google Tasks idempotency, and grounded AI invariants without real credentials. Credential-gated live contract tests must remain opt-in and must not log private payloads.
 
-### Simulator modes
+### Simulator modes and replay tests
+
+For the rebuilt app, use the standalone HTTP replay described below. The other
+simulator examples in this section (including in-process and Core Location
+replay) describe the earlier prototype.
 
 ```bash
 # From the repository root
@@ -592,7 +596,14 @@ python3 Scripts/indoor-signal-emulator.py
 SIMULATOR_NAME='iPhone 13' ./Scripts/run-simulator.sh ar-external
 ```
 
-`LocalIndoorSignalFeedClient` accepts only loopback HTTP and only when `--uitesting --qa-indoor-feed` is explicit. The server exposes `GET /reading`, `GET /status`, and `POST /control/pause|resume|next|previous|reset`. This isolates signal timing from app timing and makes disconnect/reconnect behavior testable.
+`IndoorReplayQA` in the rebuilt app accepts only loopback HTTP and requires an
+explicit `--uitesting --qa-indoor-feed` launch of a Debug Simulator build. The
+server exposes `GET /reading`, `GET /status`, and
+`POST /control/pause|resume|next|previous|reset`. Use
+`python3 Scripts/tests/test_indoor_signal_emulator.py` to test the driver alone
+and `./Scripts/test.sh` to run the simulator suite with the driver available.
+See [indoor replay architecture](IndoorPositioningArchitecture.md) for the
+implemented test boundary.
 
 For Apple Core Location delivery, boot the simulator and start the same process with `--transport core-location --device booted`, then launch `ar-corelocation`. The runner grants when-in-use location permission to the installed QA app. `CoreLocationIndoorQAService` receives `CLLocationManager` updates and `HNDCoreLocationQAFixture` maps the versioned synthetic coordinate footprint to the test graph. This path is unavailable in ordinary launches. Use `--dry-run` on the emulator to inspect the exact `simctl location` command without changing Simulator state.
 

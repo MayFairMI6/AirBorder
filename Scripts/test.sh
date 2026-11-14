@@ -10,7 +10,7 @@ if ! xcrun simctl list devices available | grep -F "$DEVICE_NAME" >/dev/null; th
   exit 1
 fi
 
-xcodebuild \
+python3 "$ROOT/Scripts/test-with-indoor-driver.py" xcodebuild \
   -project "$ROOT/AirBorder.xcodeproj" \
   -scheme AirBorder \
   -configuration Debug \

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# PROCEDURAL: Supplies synthetic position readings for simulator QA.
 """Independent localhost indoor-position signal emulator for simulator QA."""
 
 from __future__ import annotations
@@ -266,7 +267,7 @@ def main() -> None:
     clock = threading.Thread(target=run_clock, args=(state, stop), daemon=True)
     clock.start()
     server = ThreadingHTTPServer((args.host, args.port), handler_type(state))
-    print(f"Indoor signal emulator: http://{args.host}:{args.port}/reading", flush=True)
+    print(f"Indoor signal emulator: http://{args.host}:{server.server_port}/reading", flush=True)
     print(f"App signal transport: {args.transport}", flush=True)
     print("Controls: POST /control/pause|resume|next|previous|reset", flush=True)
     try:

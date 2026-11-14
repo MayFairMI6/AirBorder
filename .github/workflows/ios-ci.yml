@@ -27,6 +27,9 @@ jobs:
       - name: Xcode version
         run: xcodebuild -version
 
+      - name: Standalone indoor replay driver tests
+        run: python3 Scripts/tests/test_indoor_signal_emulator.py
+
       - name: Select and boot available iOS simulator
         run: python3 Scripts/select-ci-simulator.py
 
@@ -67,7 +70,19 @@ jobs:
             -destination "platform=iOS Simulator,id=$SIMULATOR_UDID" \
             -derivedDataPath "$DERIVED_DATA" \
             CODE_SIGNING_ALLOWED=NO \
-            test -only-testing:AirportXRCompanionUITests
+            test -only-testing:AirportXRCompanionUITests -skip-testing:AirportXRCompanionUITests/IndoorReplayIntegrationTests
+
+      - name: Indoor replay and iOS simulator integration
+        run: |
+          python3 Scripts/test-with-indoor-driver.py xcodebuild \
+            -project AirBorder.xcodeproj \
+            -scheme AirBorder \
+            -configuration Debug \
+            -destination "platform=iOS Simulator,id=$SIMULATOR_UDID" \
+            -derivedDataPath "$DERIVED_DATA" \
+            -parallel-testing-enabled NO \
+            CODE_SIGNING_ALLOWED=NO \
+            test -only-testing:AirportXRCompanionUITests/IndoorReplayIntegrationTests
 
       - name: Upload test results
         if: always()

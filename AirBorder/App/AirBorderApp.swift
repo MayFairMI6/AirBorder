@@ -40,6 +40,9 @@ struct AirBorderApp: App {
             RootView()
                 .environmentObject(store)
                 .task { await store.refreshWalkingSpeed() }
+                #if DEBUG && targetEnvironment(simulator)
+                .task { await IndoorReplayQA.run(arguments: ProcessInfo.processInfo.arguments, store: store) }
+                #endif
         }
     }
 }

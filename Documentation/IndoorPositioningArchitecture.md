@@ -2,7 +2,15 @@
 
 Updated: 2026-07-16
 
-## What the app uses today
+## Replay in the rebuilt app
+
+The rebuilt Swift app consumes the HTTP replay only in a Debug Simulator build launched with both `--uitesting` and `--qa-indoor-feed`. The replay endpoint is restricted to loopback. For the scripted Haneda Gate 105 route, the app maps known landmark IDs and floor labels to its existing route steps. Unrecognized readings leave the current instruction in place. The driver supplies synthetic labels, not measured indoor positions.
+
+iOS CI first runs the driver as a standalone process to check its HTTP responses, labels and replay controls. A separate XCUITest starts the paused driver, opens the app's Route tab, steps the driver to the upper-floor landmark and gate, then resets it. The test asserts the visible route instruction at each transition without using the app's Next step button. Run the local suite with `./Scripts/test.sh` so the harness supplies the replay endpoint.
+
+This tests the driver-to-app handoff and route-card behavior. The camera preview, physical tracking, and the older Core Location and in-process replay paths described below are outside this check.
+
+## Earlier prototype modes
 
 The `ar-preview` and `walkthrough` terminal modes use `TerminalRouteLocationEmulator` inside the app process. It generates a sequence of local `(x, y, level)` readings along the selected terminal graph, matches each reading to a named landmark, and feeds those readings into the same maneuver builder used by AR Guide. This is controlled indoor route replay, not GPS and not a claim that the simulator knows where a traveler is.
 
